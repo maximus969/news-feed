@@ -21,4 +21,4 @@ steps:
       uses: JamesIves/github-pages-deploye-action@4.1.1
       with:
           branch: gh-pages
-          folder: build
+          folder: dist
