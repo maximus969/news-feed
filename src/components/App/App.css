@@ -1,0 +1,19 @@
+.header {
+  padding-top: calc(var(--yr) * 9.5);
+  padding-bottom: calc(var(--yr) * 37.5);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, var(--grid-column-width));
+  gap: var(--grid-gap);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+.logo_image {
+  width: 100%;
+}

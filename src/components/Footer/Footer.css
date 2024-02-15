@@ -1,0 +1,37 @@
+.footer_courses_link {
+    color: var(--color-white);
+    font-weight: 400;
+}
+
+.footer_additional_links {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.footer {
+    padding-top: 22px;
+    padding-bottom: 56px;
+    background-color: var(--color-primary);
+    min-width: var(--container-width);
+}
+
+.footer_container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.course_link {
+    color: var(--color-accent);
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: revert;
+}
+
+.copyright_year {
+    color: var(--color-grey);
+}
+
+.footer_navigation_link--active {
+    color: var(--color-accent);
+}

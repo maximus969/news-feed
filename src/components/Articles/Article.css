@@ -1,0 +1,28 @@
+.article_date {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    margin-right: 6px;
+    margin-left: 20px;
+  }
+  
+  .article_title {
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 14px;
+    margin-left: 20px;
+  }
+  
+  .article_source::before {
+    content: "\00B7";
+    padding-right: 14px;
+    padding-left: 7px;
+  }
+
+.article_source {
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--color-grey);
+}
