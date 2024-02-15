@@ -1,5 +1,8 @@
 {
+    "homepage": "https://maximus969.github.io/news-feed/",
     "scripts": {
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build",
         "start": "NODE_ENV=development webpack serve",
         "build": "webpack"
     },
@@ -16,5 +19,8 @@
         "webpack": "^5.90.2",
         "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^5.0.1"
+    },
+    "devDependencies": {
+        "gh-pages": "^6.1.1"
     }
 }
