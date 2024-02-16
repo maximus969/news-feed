@@ -1,8 +1,7 @@
 {
     "homepage": "https://maximus969.github.io/news-feed",
     "scripts": {
-        "predeploy": "npm run build",
-        "deploy": "gh-pages -d dist",
+        "deploy": "gh-pages -d build",
         "start": "NODE_ENV=development webpack serve",
         "build": "webpack"
     },
