@@ -1,5 +1,5 @@
 {
-    "homepage": "https://maximus969.github.io/news-feed/",
+    "homepage": "https://maximus969.github.io/news-feed",
     "scripts": {
         "predeploy": "npm run build",
         "deploy": "gh-pages -d dist",
