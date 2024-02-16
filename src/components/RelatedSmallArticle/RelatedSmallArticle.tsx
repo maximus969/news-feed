@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
-import './RelatedSmallArticle.css';
+import React, { FC } from 'react'
+import './RelatedSmallArticle.css'
 
 interface RelatedArticleProp {
-  image: string;
-  category: string;
-  title: string;
-  source: string;
-  onArticleClick: (e: React.MouseEvent<HTMLElement>) => void;
+  image: string
+  category: string
+  title: string
+  source: string
+  onArticleClick: (e: React.MouseEvent<HTMLElement>) => void
 }
 
 export const RelatedSmallArticle: FC<RelatedArticleProp> = ({ image, category, title, source, onArticleClick }) => {
@@ -19,5 +19,5 @@ export const RelatedSmallArticle: FC<RelatedArticleProp> = ({ image, category, t
         <span className="article-source related-small-article__source">{source}</span>
       </div>
     </article>
-  );
-};
+  )
+}

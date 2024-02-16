@@ -1,32 +1,52 @@
 {
-    "homepage": "https://maximus969.github.io/news-feed",
-    "scripts": {
-        "deploy": "gh-pages -d dist",
-        "start": "NODE_ENV=development webpack serve",
-        "build": "webpack"
-    },
-    "dependencies": {
-        "@babel/cli": "7.15.7",
-        "@babel/core": "7.15.5",
-        "@babel/preset-react": "^7.14.5",
-        "babel-loader": "^8.2.2",
-        "css-loader": "^6.3.0",
-        "html-webpack-plugin": "^5.3.2",
-        "prettier": "^2.4.1",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-router-dom": "^5.3.0",
-        "style-loader": "^3.3.0",
-        "webpack": "^5.54.0",
-        "webpack-cli": "^4.8.0",
-        "webpack-dev-server": "^4.3.0"
-    },
-    "devDependencies": {
-        "@types/react": "^17.0.24",
-        "@types/react-dom": "^17.0.9",
-        "@types/react-router-dom": "^5.3.1",
-        "gh-pages": "^6.1.1",
-        "ts-loader": "^9.2.6",
-        "typescript": "^4.4.3"
-    }
+  "homepage": "https://maximus969.github.io/news-feed",
+  "scripts": {
+    "eslint": "eslint --ext .js,.ts,.tsx ./",
+    "stylelint": "stylelint \"src/{**/*,*}.css\"",
+    "prettier": "prettier --write ./",
+    "prettier-check": "prettier --check ./",
+    "deploy": "gh-pages -d dist",
+    "start": "NODE_ENV=development webpack serve",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "@babel/cli": "7.15.7",
+    "@babel/core": "7.15.5",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^6.3.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-webpack-plugin": "^4.0.1",
+    "html-webpack-plugin": "^5.3.2",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.4.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.3.0",
+    "style-loader": "^3.3.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-webpack-plugin": "^5.0.0",
+    "webpack": "^5.54.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-router-dom": "^5.3.1",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "gh-pages": "^6.1.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.4.3"
+  },
+  "pre-commit": [
+    "stylelint",
+    "eslint",
+    "prettier-check"
+  ]
 }

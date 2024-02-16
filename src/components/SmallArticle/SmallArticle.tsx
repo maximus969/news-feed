@@ -1,14 +1,14 @@
-import React, { FC } from 'react';
-import { beautifyDate } from '../../types';
-import './SmallArticle.css';
+import React, { FC } from 'react'
+import { beautifyDate } from '../../types'
+import './SmallArticle.css'
 
 type SmallArticleType = {
-  title: string;
-  source?: string;
-  date: string;
-  onArticleClick: (e: React.MouseEvent<HTMLElement>) => void;
-  articleId: number | null;
-};
+  title: string
+  source?: string
+  date: string
+  onArticleClick: (e: React.MouseEvent<HTMLElement>) => void
+  articleId: number | null
+}
 
 export const SmallArticle: FC<SmallArticleType> = ({ title, source, date, onArticleClick }) => {
   return (
@@ -17,5 +17,5 @@ export const SmallArticle: FC<SmallArticleType> = ({ title, source, date, onArti
       <span className="article-date">{source}</span>
       <span className="article-source">{beautifyDate(date)}</span>
     </article>
-  );
-};
+  )
+}

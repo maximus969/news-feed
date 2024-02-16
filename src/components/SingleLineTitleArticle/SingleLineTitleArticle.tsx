@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
-import './SingleLineTitleArticle.css';
+import React, { FC } from 'react'
+import './SingleLineTitleArticle.css'
 
 interface SingleLineTitleArticleProp {
-  image: string;
-  category: string;
-  title: string;
-  source: string;
-  text: string;
-  onArticleClick: (e: React.MouseEvent<HTMLElement>) => void;
+  image: string
+  category: string
+  title: string
+  source: string
+  text: string
+  onArticleClick: (e: React.MouseEvent<HTMLElement>) => void
 }
 
 export const SingleLineTitleArticle: FC<SingleLineTitleArticleProp> = ({
@@ -26,5 +26,5 @@ export const SingleLineTitleArticle: FC<SingleLineTitleArticleProp> = ({
       <p className="single-line-title-article__text">{text}</p>
       <span className="article-source single-line-title-article__source">{source}</span>
     </article>
-  );
-};
+  )
+}

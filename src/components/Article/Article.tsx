@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import './Article.css';
-import { RelatedSmallArticle } from '../RelatedSmallArticle/RelatedSmallArticle';
-import { SingleLineTitleArticle } from '../SingleLineTitleArticle/SingleLineTitleArticle';
-import { ArticleItem, beautifyDate, Categories, Items, RelatedArticleItem, Sources } from '../../types';
+import React, { useEffect, useState } from 'react'
+import './Article.css'
+import { RelatedSmallArticle } from '../RelatedSmallArticle/RelatedSmallArticle'
+import { SingleLineTitleArticle } from '../SingleLineTitleArticle/SingleLineTitleArticle'
+import { ArticleItem, beautifyDate, Categories, Items, RelatedArticleItem, Sources } from '../../types'
 
 interface Article {
-  id: number;
-  categories: Categories[];
-  sources: Sources[];
-  onArticleClick: (id: number) => void;
+  id: number
+  categories: Categories[]
+  sources: Sources[]
+  onArticleClick: (id: number) => void
 }
 
 export const Article: React.FC<Article> = ({ id, categories, sources, onArticleClick }) => {
-  const [articleItem, setArticleItem] = useState<ArticleItem | null>(null);
-  const [relatedArticle, setRelatedArticle] = useState<Items[] | null>(null);
+  const [articleItem, setArticleItem] = useState<ArticleItem | null>(null)
+  const [relatedArticle, setRelatedArticle] = useState<Items[] | null>(null)
 
   useEffect(() => {
     fetch(`https://frontend.karpovcourses.net/api/v2/news/full/${id}`)
       .then((response) => response.json())
-      .then(setArticleItem);
+      .then(setArticleItem)
 
     fetch(`https://frontend.karpovcourses.net/api/v2/news/related/${id}?counts=9`)
       .then((response) => response.json())
-      .then((response: RelatedArticleItem) => setRelatedArticle(response.items));
-  }, [id]);
+      .then((response: RelatedArticleItem) => setRelatedArticle(response.items))
+  }, [id])
 
   if (articleItem === null || relatedArticle === null) {
-    return null;
+    return null
   }
 
   return (
@@ -74,8 +74,8 @@ export const Article: React.FC<Article> = ({ id, categories, sources, onArticleC
 
           <div className="article__small-column">
             {relatedArticle?.slice(3, 9)?.map((article) => {
-              const category = categories?.find(({ id }) => article?.category_id === id);
-              const source = sources?.find(({ id }) => article?.source_id === id);
+              const category = categories?.find(({ id }) => article?.category_id === id)
+              const source = sources?.find(({ id }) => article?.source_id === id)
               return (
                 <RelatedSmallArticle
                   key={article.id}
@@ -85,7 +85,7 @@ export const Article: React.FC<Article> = ({ id, categories, sources, onArticleC
                   category={category?.name || ''}
                   onArticleClick={() => onArticleClick(article.id)}
                 />
-              );
+              )
             })}
           </div>
         </div>
@@ -97,8 +97,8 @@ export const Article: React.FC<Article> = ({ id, categories, sources, onArticleC
 
           <div className="grid article-page__related-articles-list">
             {relatedArticle?.slice(0, 3).map((article) => {
-              const category = categories?.find(({ id }) => article?.category_id === id);
-              const source = sources?.find(({ id }) => article?.source_id === id);
+              const category = categories?.find(({ id }) => article?.category_id === id)
+              const source = sources?.find(({ id }) => article?.source_id === id)
               return (
                 <SingleLineTitleArticle
                   key={article.id}
@@ -109,11 +109,11 @@ export const Article: React.FC<Article> = ({ id, categories, sources, onArticleC
                   title={article.title}
                   onArticleClick={() => onArticleClick(article.id)}
                 />
-              );
+              )
             })}
           </div>
         </div>
       </section>
     </section>
-  );
-};
+  )
+}
