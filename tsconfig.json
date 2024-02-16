@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src", "custom.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

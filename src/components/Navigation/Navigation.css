@@ -1,58 +1,62 @@
-.navigation_list {
-    display: flex;
-    list-style: none;
-    grid-column: 5/-1;
-  }
-  
-  .navigation_logo {
-    grid-column: span 4;
-    padding-right: calc(var(--yr) * 13);
-  }
-  
-  .navigation_item, .footer_navigation_item {
-    margin-right: calc(var(--yr) * 15);
-  }
-  
-  .navigation_item:last-child {
-    margin-right: 0px;
-  }
-  
-  .navigation_link {
-    font-size: calc(var(--yr) * 6);
-    color: var(--color-primary);
-    font-weight: 900;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  .footer_navigation_link {
-    font-size: calc(var(--yr) * 6);
-    color: var(--color-white);
-    font-weight: 900;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  
-  .navigation_link:hover, .footer_navigation_link:hover {
-    color: var(--color-accent);
-  }
-  
-  .navigation_link_active, .footer_navigation_link--active {
-    color: var(--color-accent);
-  }
-
-  .footer_navigation_link {
-    color: var(--color-white);
+.navigation__logo {
+    display: block;
 }
 
-.footer_navigation_logo {
+.navigation__logo-image {
+    width: 100%;
+}
+
+.navigation__list {
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+}
+
+.navigation__item {
+    margin-right: 60px;
+}
+
+.navigation__item:last-child {
+    margin-right: 0;
+}
+
+.navigation__link {
+    font-size: 24px;
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--link-color);
+}
+
+.navigation__link--active,
+.navigation__link:hover {
+    color: var(--color-accent);
+}
+
+.navigation--footer {
+    align-items: center;
+
+    --link-color: var(--color-white);
+}
+
+.navigation--header {
+    --link-color: var(--color-primary);
+}
+
+.navigation--footer .navigation__logo {
     grid-column: span 2;
     padding-right: 56px;
 }
 
-.footer_navigation_list {
-    display: flex;
-    list-style: none;
+.navigation--footer .navigation__list {
     grid-column: 3/-1;
-    margin-bottom: 50px;
-    align-items: center;
+}
+
+.navigation--header .navigation__logo {
+    grid-column: span 4;
+    padding-right: 32px;
+}
+
+.navigation--header .navigation__list {
+    grid-column: 5/-1;
 }
