@@ -1,9 +1,7 @@
 .main-article {
   margin-bottom: 95px;
-  display: grid;
-  grid-template-columns: repeat(9, var(--grid-column-width));
-  gap: var(--grid-gap);
   cursor: pointer;
+  display: block;
 }
 
 .main-article:last-child {
@@ -32,6 +30,12 @@
 
 .main-article__category {
   margin-bottom: 7px;
+}
+
+.main-article-container {
+  display: grid;
+  grid-template-columns: repeat(9, var(--grid-column-width));
+  gap: var(--grid-gap);
 }
 
 .main-article__title {

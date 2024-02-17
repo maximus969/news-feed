@@ -1,23 +1,26 @@
 import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
 import './RelatedSmallArticle.css'
 
-interface RelatedArticleProp {
+interface Props {
+  id: number
   image: string
-  category: string
   title: string
+  category: string
   source: string
-  onArticleClick: (e: React.MouseEvent<HTMLElement>) => void
 }
 
-export const RelatedSmallArticle: FC<RelatedArticleProp> = ({ image, category, title, source, onArticleClick }) => {
+export const RelatedSmallArticle: FC<Props> = ({ id, image, category, source, title }) => {
   return (
-    <article className="related-small-article" onClick={onArticleClick}>
-      <img className="related-small-article__image" src={image} />
-      <div className="related-small-article__content">
-        <span className="article-category related-small-article__category">{category}</span>
-        <h2 className="related-small-article__title">{title}</h2>
-        <span className="article-source related-small-article__source">{source}</span>
-      </div>
-    </article>
+    <Link to={`/article/${id}`} className="related-small-article">
+      <article className="related-small-article-container">
+        <img className="related-small-article-image" src={image} />
+        <div className="related-small-article-content">
+          <span className="article-category related-small-article-category">{category}</span>
+          <h2 className="related-small-article-title">{title}</h2>
+          <span className="article-source related-small-article-source">{source}</span>
+        </div>
+      </article>
+    </Link>
   )
 }

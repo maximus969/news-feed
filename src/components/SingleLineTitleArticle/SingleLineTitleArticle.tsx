@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
 import './SingleLineTitleArticle.css'
 
 interface SingleLineTitleArticleProp {
@@ -7,7 +8,7 @@ interface SingleLineTitleArticleProp {
   title: string
   source: string
   text: string
-  onArticleClick: (e: React.MouseEvent<HTMLElement>) => void
+  id: number | string
 }
 
 export const SingleLineTitleArticle: FC<SingleLineTitleArticleProp> = ({
@@ -16,15 +17,17 @@ export const SingleLineTitleArticle: FC<SingleLineTitleArticleProp> = ({
   title,
   text,
   source,
-  onArticleClick,
+  id,
 }) => {
   return (
-    <article className="single-line-title-article" onClick={onArticleClick}>
-      <img className="single-line-title-article__image" src={image} />
-      <span className="article-category single-line-title-article__category">{category}</span>
-      <h2 className="single-line-title-article__title">{title}</h2>
-      <p className="single-line-title-article__text">{text}</p>
-      <span className="article-source single-line-title-article__source">{source}</span>
-    </article>
+    <Link to={`/article/${id}`} className="single-line-title-article">
+      <article className="single-line-title-article-container">
+        <img className="single-line-title-article__image" src={image} />
+        <span className="article-category single-line-title-article__category">{category}</span>
+        <h2 className="single-line-title-article__title">{title}</h2>
+        <p className="single-line-title-article__text">{text}</p>
+        <span className="article-source single-line-title-article__source">{source}</span>
+      </article>
+    </Link>
   )
 }

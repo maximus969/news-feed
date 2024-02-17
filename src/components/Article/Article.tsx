@@ -3,29 +3,37 @@ import './Article.css'
 import { RelatedSmallArticle } from '../RelatedSmallArticle/RelatedSmallArticle'
 import { SingleLineTitleArticle } from '../SingleLineTitleArticle/SingleLineTitleArticle'
 import { ArticleItem, beautifyDate, Categories, Items, RelatedArticleItem, Sources } from '../../types'
+import { useParams } from 'react-router-dom'
 
-interface Article {
-  id: number
-  categories: Categories[]
-  sources: Sources[]
-  onArticleClick: (id: number) => void
-}
-
-export const Article: React.FC<Article> = ({ id, categories, sources, onArticleClick }) => {
+export const Article: React.FC = () => {
+  const { id }: { id?: string } = useParams()
   const [articleItem, setArticleItem] = useState<ArticleItem | null>(null)
-  const [relatedArticle, setRelatedArticle] = useState<Items[] | null>(null)
+  const [relatedArticles, setRelatedArticles] = useState<Items[] | null>(null)
+  const [categories, setCategories] = useState<Categories[] | null>([])
+  const [sources, setSources] = useState<Sources[] | null>([])
 
   useEffect(() => {
     fetch(`https://frontend.karpovcourses.net/api/v2/news/full/${id}`)
       .then((response) => response.json())
       .then(setArticleItem)
 
-    fetch(`https://frontend.karpovcourses.net/api/v2/news/related/${id}?counts=9`)
-      .then((response) => response.json())
-      .then((response: RelatedArticleItem) => setRelatedArticle(response.items))
+    Promise.all([
+      fetch(`https://frontend.karpovcourses.net/api/v2/news/related/${id}?count=9`).then((response) => response.json()),
+      fetch(`https://frontend.karpovcourses.net/api/v2/categories`).then((response) => response.json()),
+      fetch(`https://frontend.karpovcourses.net/api/v2/sources`).then((response) => response.json()),
+    ]).then((response) => {
+      const articles: RelatedArticleItem = response[0]
+      setRelatedArticles(articles.items)
+
+      const categories = response[1]
+      setCategories(categories)
+
+      const sources = response[2]
+      setSources(sources)
+    })
   }, [id])
 
-  if (articleItem === null || relatedArticle === null) {
+  if (articleItem === null || relatedArticles === null) {
     return null
   }
 
@@ -66,24 +74,21 @@ export const Article: React.FC<Article> = ({ id, categories, sources, onArticleC
             )}
 
             <p>{articleItem?.text}</p>
-            <p>{articleItem?.text}</p>
-            <img src={articleItem?.image} />
-            <p>{articleItem?.text}</p>
             <img src={articleItem?.image} />
           </div>
 
           <div className="article__small-column">
-            {relatedArticle?.slice(3, 9)?.map((article) => {
-              const category = categories?.find(({ id }) => article?.category_id === id)
-              const source = sources?.find(({ id }) => article?.source_id === id)
+            {relatedArticles.slice(3, 9).map((item) => {
+              const category = categories?.find(({ id }) => item.category_id === id)
+              const source = sources?.find(({ id }) => item.source_id === id)
               return (
                 <RelatedSmallArticle
-                  key={article.id}
-                  source={source?.name || ''}
-                  title={article.title}
-                  image={article.image}
+                  id={item.id}
+                  key={item.id}
+                  title={item.title}
                   category={category?.name || ''}
-                  onArticleClick={() => onArticleClick(article.id)}
+                  source={source?.name || ''}
+                  image={item.image}
                 />
               )
             })}
@@ -96,7 +101,7 @@ export const Article: React.FC<Article> = ({ id, categories, sources, onArticleC
           <h2 className="article-page__related-articles-title">{articleItem?.title}</h2>
 
           <div className="grid article-page__related-articles-list">
-            {relatedArticle?.slice(0, 3).map((article) => {
+            {relatedArticles?.slice(0, 3).map((article) => {
               const category = categories?.find(({ id }) => article?.category_id === id)
               const source = sources?.find(({ id }) => article?.source_id === id)
               return (
@@ -107,7 +112,7 @@ export const Article: React.FC<Article> = ({ id, categories, sources, onArticleC
                   category={category?.name || ''}
                   text={article.description}
                   title={article.title}
-                  onArticleClick={() => onArticleClick(article.id)}
+                  id={article.id}
                 />
               )
             })}
