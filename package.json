@@ -7,7 +7,8 @@
     "prettier-check": "prettier --check ./",
     "deploy": "gh-pages -d dist",
     "start": "NODE_ENV=development webpack serve",
-    "build": "webpack"
+    "build": "webpack",
+    "build-github": "NODE_ENV=production webpack"
   },
   "dependencies": {
     "@babel/cli": "7.15.7",

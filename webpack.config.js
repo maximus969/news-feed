@@ -50,7 +50,7 @@ module.exports = {
       files: 'src/{**/*,*}.{tsx,ts}',
     }),
     new DefinePlugin({
-      'process.env.REACT_APP_BASENAME': JSON.stringify(process.env.NODE_ENV === 'development' ? '' : repositoryName),
+      'process.env.REACT_APP_BASENAME': JSON.stringify(process.env.NODE_ENV === 'production' ? repositoryName : ''),
     }),
   ],
   devServer: {
