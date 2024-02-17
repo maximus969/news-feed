@@ -4,8 +4,10 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './common.css'
 import { App } from './components/App/App'
 
+const basename = process.env.REACT_APP_BASENAME || ''
+
 ReactDOM.render(
-  <Router basename={'/news-feed'}>
+  <Router basename={basename}>
     <App />
   </Router>,
   document.getElementById('root')
