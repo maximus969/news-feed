@@ -75,10 +75,6 @@ export const Article: React.FC = () => {
               <div className="article__title-container">
                 <h1 className="article__title">{articleItem?.title}</h1>
                 {renderArticleItemInfo(articleItem)}
-                {/* <div className="grid">
-                  <span className="article-category article__category">{articleItem?.category?.name}</span>
-                  <span className="article-date article__date">{beautifyDate(articleItem?.date)}</span>
-                </div> */}
               </div>
             )}
 
