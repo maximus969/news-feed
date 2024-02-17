@@ -27,15 +27,16 @@ export interface NewsResponse {
 
 export interface ArticleItem {
   id: number
-  lang: string
+  lang?: string
   date: string
   title: string
-  description: string
+  description?: string
   image: string
   link: string
   text: string
   category: Categories
   source: Sources
+  author?: string
 }
 
 export interface RelatedArticleItem {

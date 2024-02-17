@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import './Article.css'
 import { RelatedSmallArticle } from '../RelatedSmallArticle/RelatedSmallArticle'
 import { SingleLineTitleArticle } from '../SingleLineTitleArticle/SingleLineTitleArticle'
-import { ArticleItem, beautifyDate, Categories, Items, RelatedArticleItem, Sources } from '../../types'
+import { ArticleItem, Categories, Items, RelatedArticleItem, Sources } from '../../types'
 import { useParams } from 'react-router-dom'
+import { ArticleItemInfo } from '../ArticleItemInfo/ArticleItemInfo'
 
 export const Article: React.FC = () => {
-  const { id }: { id?: string } = useParams()
+  const { id }: { id?: number } = useParams()
   const [articleItem, setArticleItem] = useState<ArticleItem | null>(null)
   const [relatedArticles, setRelatedArticles] = useState<Items[] | null>(null)
   const [categories, setCategories] = useState<Categories[] | null>([])
@@ -37,6 +38,18 @@ export const Article: React.FC = () => {
     return null
   }
 
+  const renderArticleItemInfo = (articleItem: ArticleItem) => {
+    return (
+      <ArticleItemInfo
+        categoryName={articleItem.category.name}
+        date={articleItem.date}
+        sourceLink={articleItem.source?.site}
+        sourceName={articleItem.source.name}
+        author={articleItem.author}
+      />
+    )
+  }
+
   return (
     <section className="article-page">
       <article className="article">
@@ -51,11 +64,7 @@ export const Article: React.FC = () => {
               <div className="grid">
                 <h1 className="article__hero-title">{articleItem?.title}</h1>
               </div>
-
-              <div className="grid">
-                <span className="article-category article__category">{articleItem?.category?.name}</span>
-                <span className="article-date article__date">{beautifyDate(articleItem?.date)}</span>
-              </div>
+              {renderArticleItemInfo(articleItem)}
             </div>
           </section>
         ) : null}
@@ -65,11 +74,11 @@ export const Article: React.FC = () => {
             {!articleItem?.image?.length && (
               <div className="article__title-container">
                 <h1 className="article__title">{articleItem?.title}</h1>
-
-                <div className="grid">
+                {renderArticleItemInfo(articleItem)}
+                {/* <div className="grid">
                   <span className="article-category article__category">{articleItem?.category?.name}</span>
                   <span className="article-date article__date">{beautifyDate(articleItem?.date)}</span>
-                </div>
+                </div> */}
               </div>
             )}
 
