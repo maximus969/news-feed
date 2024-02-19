@@ -48,7 +48,7 @@ module.exports = {
       files: 'src/{**/*,*}.{tsx,ts}',
     }),
     new DefinePlugin({
-      'process.env.GH_PAGES': JSON.stringify(process.env.NODE_ENV === 'production' ? 'true' : 'false'),
+      'process.env.FOR_GH_PAGES': JSON.stringify(process.env.NODE_ENV === 'production' ? 'true' : 'false'),
     }),
   ],
   devServer: {

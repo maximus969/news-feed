@@ -1,22 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, HashRouter } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import './common.css'
 import { App } from './components/App/App'
 
-const isForGHPages = process.env.GH_PAGES === 'true'
+const basename = process.env.FOR_GH_PAGES === 'true' ? '/news-feed' : undefined
 
 ReactDOM.render(
-  <>
-    {isForGHPages ? (
-      <HashRouter>
-        <App />
-      </HashRouter>
-    ) : (
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    )}
-  </>,
+  <Router basename={basename}>
+    <App />
+  </Router>,
   document.getElementById('root')
 )
