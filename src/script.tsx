@@ -1,14 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import './common.css'
 import { App } from './components/App/App'
 
-const basename = process.env.REACT_APP_BASENAME || ''
+const isForGHPages = process.env.GH_PAGES === 'true'
 
 ReactDOM.render(
-  <Router basename={basename}>
-    <App />
-  </Router>,
+  <>
+    {isForGHPages ? (
+      <HashRouter>
+        <App />
+      </HashRouter>
+    ) : (
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    )}
+  </>,
   document.getElementById('root')
 )

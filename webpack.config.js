@@ -4,16 +4,13 @@ const ESLintPlugin = require('eslint-webpack-plugin')
 const StylelintPlugin = require('stylelint-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 
-// for gh-pages to work with BrowserRouter
-const repositoryName = 'news-feed'
-
 module.exports = {
   mode: process.env.NODE_ENV || 'production',
   entry: './src/script.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[contenthash].js',
-    publicPath: './',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -51,7 +48,7 @@ module.exports = {
       files: 'src/{**/*,*}.{tsx,ts}',
     }),
     new DefinePlugin({
-      'process.env.REACT_APP_BASENAME': JSON.stringify(process.env.NODE_ENV === 'production' ? repositoryName : ''),
+      'process.env.GH_PAGES': JSON.stringify(process.env.NODE_ENV === 'production' ? 'true' : 'false'),
     }),
   ],
   devServer: {

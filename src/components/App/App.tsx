@@ -1,8 +1,8 @@
 import { Articles } from '../Articles/Articles'
 import { Article } from '../Article/Article'
-import React from 'react'
+import React, { useEffect } from 'react'
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 
 import { AdminPanel } from '../Admin/AdminPanel'
 import { Page } from '../Page/Page'
@@ -10,11 +10,11 @@ import { AdminArticlesItem } from '../AdminArticlesItem/AdminArticlesItem'
 import { AdminArticles } from '../AdminArticles/AdminArticles'
 
 export const App: React.FC = () => {
-  // const { pathname } = useLocation()
+  const { pathname } = useLocation()
 
-  // useEffect(() => {
-  //   window.scrollTo(0, 0)
-  // }, [pathname])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
 
   return (
     <React.Fragment>
