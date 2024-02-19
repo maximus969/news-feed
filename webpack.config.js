@@ -4,13 +4,15 @@ const ESLintPlugin = require('eslint-webpack-plugin')
 const StylelintPlugin = require('stylelint-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 
+const pathForGhPages = process.env.NODE_ENV === 'production' ? '/news-feed' : '/'
+
 module.exports = {
   mode: process.env.NODE_ENV || 'production',
   entry: './src/script.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[contenthash].js',
-    publicPath: '/',
+    publicPath: pathForGhPages,
   },
   module: {
     rules: [

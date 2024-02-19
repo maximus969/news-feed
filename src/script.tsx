@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './common.css'
 import { App } from './components/App/App'
 
-const basename = process.env.FOR_GH_PAGES === 'true' ? '/news-feed' : undefined
+const basename = process.env.FOR_GH_PAGES === 'true' ? '/news-feed/' : '/'
 
 ReactDOM.render(
   <Router basename={basename}>
