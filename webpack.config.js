@@ -7,15 +7,13 @@ const { DefinePlugin } = require('webpack')
 // for gh-pages to work with BrowserRouter
 const repositoryName = 'news-feed'
 
-const publicPath = process.env.NODE_ENV === 'production' ? `/${repositoryName}/` : '/'
-
 module.exports = {
   mode: process.env.NODE_ENV || 'production',
   entry: './src/script.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[contenthash].js',
-    publicPath: publicPath,
+    publicPath: './',
   },
   module: {
     rules: [
