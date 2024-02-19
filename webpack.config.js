@@ -3,6 +3,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const StylelintPlugin = require('stylelint-webpack-plugin')
 const { DefinePlugin } = require('webpack')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const pathForGhPages = process.env.NODE_ENV === 'production' ? '/news-feed' : '/'
 
@@ -51,6 +52,9 @@ module.exports = {
     }),
     new DefinePlugin({
       'process.env.FOR_GH_PAGES': JSON.stringify(process.env.NODE_ENV === 'production' ? 'true' : 'false'),
+    }),
+    new CopyPlugin({
+      patterns: [{ from: './public', to: '' }],
     }),
   ],
   devServer: {
