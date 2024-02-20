@@ -1,9 +1,19 @@
-import { Grid, Typography, Box, Button, Card, CardMedia, CardContent } from '@mui/material'
-import React from 'react'
+import { Grid, Typography, Box, Button, Card, CardMedia, CardContent, CardActionArea } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { getPartnersArticles } from '../../api'
+import { IPartnersPosts } from '../../types'
 
-// страница списка партнерских новостей
 export const AdminArticles: React.FC = () => {
+  const [articles, setArticles] = useState<IPartnersPosts[]>([])
+
+  useEffect(() => {
+    ;(async () => {
+      const articlesList = await getPartnersArticles()
+      setArticles(articlesList)
+    })()
+  }, [])
+
   return (
     <>
       <Grid container spacing={2}>
@@ -23,26 +33,25 @@ export const AdminArticles: React.FC = () => {
       </Grid>
 
       <Grid container spacing={2}>
-        <Grid item xs={3}>
-          <Card>
-            <CardMedia
-              component={Link}
-              to="/admin.edit/:id"
-              sx={{ height: 140 }}
-              image="/static/images/cards/contemplative-reptile.jpg"
-              title="green iguana"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Lizard
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all
-                continents except Antarctica
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+        {articles.map((item) => {
+          return (
+            <Grid item xs={3} key={item.id}>
+              <Card>
+                <CardActionArea component={Link} to={`/admin/edit/${item.id}`}>
+                  <CardMedia component={'img'} sx={{ height: 140 }} image={item.image} alt={item.articleTitle} />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {item.articleTitle}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {item.description}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          )
+        })}
       </Grid>
     </>
   )
