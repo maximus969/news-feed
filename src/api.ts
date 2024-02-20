@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app'
+import { FirebaseApp, initializeApp } from 'firebase/app'
 import {
   getFirestore,
   collection,
@@ -14,9 +14,10 @@ import {
 } from 'firebase/firestore'
 import { IPartnersPosts } from './types'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { getAuth } from 'firebase/auth'
 
-export const initializeAPI = () => {
-  initializeApp({
+export const initializeAPI = (): FirebaseApp => {
+  const firebaseApp = initializeApp({
     apiKey: 'AIzaSyALixa0xIMZo39PEUdu1z_i_rj1MFKQTpQ',
     authDomain: 'front-news-feed.firebaseapp.com',
     projectId: 'front-news-feed',
@@ -25,7 +26,11 @@ export const initializeAPI = () => {
     appId: '1:590209172328:web:0c91346fa6ffd8bd9a4cdd',
   })
 
-  getFirestore()
+  getAuth(firebaseApp)
+  getFirestore(firebaseApp)
+  getStorage(firebaseApp)
+
+  return firebaseApp
 }
 
 const partnersPostCollection = 'partners-posts'

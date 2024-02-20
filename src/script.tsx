@@ -4,14 +4,17 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './common.css'
 import { initializeAPI } from './api'
 import { App } from './components/App/App'
+import { AuthContextProvider } from './Features/Auth/AuthContextProvider'
 
-initializeAPI()
+const firebaseApp = initializeAPI()
 
 const basename = process.env.FOR_GH_PAGES === 'true' ? '/news-feed/' : '/'
 
 ReactDOM.render(
-  <Router basename={basename}>
-    <App />
-  </Router>,
+  <AuthContextProvider firebaseApp={firebaseApp}>
+    <Router basename={basename}>
+      <App />
+    </Router>
+  </AuthContextProvider>,
   document.getElementById('root')
 )
