@@ -1,4 +1,4 @@
-import { Grid, Typography, Box, Button, Card, CardMedia, CardContent, CardActionArea } from '@mui/material'
+import { Grid, Typography, Box, Button, Card, CardMedia, CardContent } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getPartnersArticles } from '../../api'
@@ -33,25 +33,21 @@ export const AdminArticles: React.FC = () => {
       </Grid>
 
       <Grid container spacing={2}>
-        {articles.map((item) => {
-          return (
-            <Grid item xs={3} key={item.id}>
-              <Card>
-                <CardActionArea component={Link} to={`/admin/edit/${item.id}`}>
-                  <CardMedia component={'img'} sx={{ height: 140 }} image={item.image} alt={item.articleTitle} />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {item.articleTitle}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {item.description}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Grid>
-          )
-        })}
+        {articles.map((article) => (
+          <Grid item xs={3} key={article.id}>
+            <Card component={Link} to={`/admin/edit/${article.id}`}>
+              <CardMedia sx={{ height: 140 }} image={article.image} title={article.articleTitle} />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {article.articleTitle}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {article.text}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
     </>
   )

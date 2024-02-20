@@ -57,4 +57,8 @@ export interface IPartnersPosts {
   description: string
   text: string
   image: string
+  created: {
+    nanoseconds: number
+    seconds: number
+  }
 }
