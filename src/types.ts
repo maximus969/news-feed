@@ -49,3 +49,16 @@ export const beautifyDate = (date: string): string => {
     day: 'numeric',
   })
 }
+
+export interface IPartnersPosts {
+  id: string
+  'company-name': string
+  articleTitle: string
+  description: string
+  text: string
+  image: string
+  created: {
+    nanoseconds: number
+    seconds: number
+  }
+}

@@ -9,20 +9,30 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Snackbar,
   TextField,
   Typography,
 } from '@mui/material'
-import React, { ChangeEvent, FormEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useParams } from 'react-router-dom'
 import { getErrors, getImage } from './helpers'
 import { InputRefs, InputValues, InputError, InputNameType } from './types'
+import {
+  createPartnerArticle,
+  deletePartnerArticle,
+  getPartnerArticle,
+  updatePartnerArticle,
+  uploadFile,
+} from '../../api'
+import CloseIcon from '@mui/icons-material/Close'
 
-// страница редактирования партнерских статей
 export const AdminArticlesItem: React.FC = () => {
   const { id } = useParams()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [snackBarMessage, setSnackBarMessage] = useState<string | null>(null)
   const open = Boolean(anchorEl)
+
   const handleClose = () => {
     setAnchorEl(null)
   }
@@ -31,6 +41,32 @@ export const AdminArticlesItem: React.FC = () => {
     setAnchorEl(event.currentTarget)
   }
 
+  const onCloseSnackBar = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setSnackBarMessage(null)
+  }
+
+  const deleteArticle = (id: string) => {
+    if (!id) return
+    deletePartnerArticle(id)
+      .then(() => {
+        setSnackBarMessage(`✅ Статья удалена!`)
+      })
+      .catch((err) => {
+        setSnackBarMessage(`❌ ${err.message}`)
+      })
+  }
+
+  const action = (
+    <>
+      <IconButton size="small" aria-label="close" color="inherit" onClick={onCloseSnackBar}>
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  )
+
   const inputRefs: InputRefs = {
     'company-name': useRef<HTMLInputElement>(),
     articleTitle: useRef<HTMLInputElement>(),
@@ -38,7 +74,7 @@ export const AdminArticlesItem: React.FC = () => {
     text: useRef<HTMLTextAreaElement>(),
     image: useRef<HTMLInputElement>(),
   }
-  const [inputFile, setInputFile] = useState<File | null>(null)
+
   const [inputValues, setInputValues] = useState<InputValues>({
     'company-name': '',
     articleTitle: '',
@@ -72,11 +108,7 @@ export const AdminArticlesItem: React.FC = () => {
     const data = new FormData()
 
     Object.entries(inputValues).forEach(([name, value]) => {
-      if (name === 'image') {
-        data.append(name, inputFile || new File([], ''))
-      } else {
-        data.append(name, value)
-      }
+      data.append(name, value)
     })
 
     // 2. проверка данных на соответсвие условиям
@@ -99,14 +131,43 @@ export const AdminArticlesItem: React.FC = () => {
     }
 
     // 4. Если все ок, то отправить данные на бэк
-    fetch('https://httpbin.org/post', {
-      method: 'POST',
-      body: data,
-    })
+    if (id) {
+      updatePartnerArticle(id, inputValues)
+        .then(() => {
+          setSnackBarMessage(`✅ Статья обновлена!`)
+        })
+        .catch((err) => {
+          setSnackBarMessage(`❌ ${err.message}`)
+        })
+    } else {
+      createPartnerArticle(inputValues)
+        .then(() => {
+          setSnackBarMessage(`✅ Статья создана!`)
+        })
+        .catch((err) => {
+          setSnackBarMessage(`❌ ${err.message}`)
+        })
+    }
   }
 
-  const showFile = (event: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    if (!id) return
+    ;(async () => {
+      const data = await getPartnerArticle(id)
+      setInputValues({
+        'company-name': data['company-name'],
+        articleTitle: data.articleTitle,
+        description: data.description,
+        text: data.text,
+        image: data.image,
+      })
+    })()
+  }, [id])
+
+  const showFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.currentTarget.files
+
+    console.log('files: ', files)
 
     if (files === null || !files.length) {
       return
@@ -118,27 +179,37 @@ export const AdminArticlesItem: React.FC = () => {
       return
     }
 
-    setInputFile(file)
+    // get image
+    const image = await getImage(file)
 
-    getImage(file).then((image) => {
+    // validate image
+    if (image.width < 200 || image.height < 200) {
+      setInputErrors({
+        ...inputErrors,
+        image: 'Изображение должно быть минимум 200x200',
+      })
+      return
+    }
+
+    // download image
+    try {
+      const url = await uploadFile(file)
       setInputValues({
         ...inputValues,
-        image: image.src,
+        image: url,
       })
-    })
+    } catch (err: any) {
+      setSnackBarMessage(`${err.message}`)
+    }
   }
 
   return (
     <Box component={'form'} noValidate onSubmit={onSubmitForm}>
       <Grid container spacing={2}>
         <Grid item xs={9} sx={{ mb: 3 }}>
-          {id ? (
-            <Typography variant="h4" gutterBottom>
-              Редактирование статьи
-            </Typography>
-          ) : (
-            'Создать новую'
-          )}
+          <Typography variant="h4" gutterBottom>
+            {id ? `Редактирование статьи ${inputValues.articleTitle}` : 'Создать новую'}
+          </Typography>
         </Grid>
       </Grid>
 
@@ -169,7 +240,7 @@ export const AdminArticlesItem: React.FC = () => {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Удалить статью</MenuItem>
+                <MenuItem onClick={() => deleteArticle(id)}>Удалить статью</MenuItem>
               </Menu>
             </div>
           )}
@@ -258,6 +329,13 @@ export const AdminArticlesItem: React.FC = () => {
             </CardActionArea>
           </Card>
         </Grid>
+        <Snackbar
+          open={typeof snackBarMessage === 'string'}
+          autoHideDuration={6000}
+          onClose={onCloseSnackBar}
+          message={snackBarMessage}
+          action={action}
+        />
       </Grid>
     </Box>
   )
