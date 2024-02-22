@@ -6,14 +6,17 @@
 }
 
 :root {
+  --constant-overlay-black-alpha64: rgba(0, 0, 0, 0.64);
   --constant-black: #262a2f;
   --constant-accent: #0083fc;
   --constant-grey: #a3a3a3;
+  --constant-grey1: #ebebeb;
   --constant-white: #fff;
   --color-overlay-black: #000;
   --background-zero: var(--constant-white);
   --background-primary: var(--constant-white);
   --foreground-primary: var(--constant-black);
+  --color-scheme-border: var(--constant-grey1);
   --container-width: 940px;
   --grid-column-width: 60px;
   --container-padding: 20px;
@@ -26,6 +29,7 @@
   --background-zero: #131517;
   --background-primary: var(--constant-black);
   --foreground-primary: var(--constant-white);
+  --color-scheme-border: transparent;
 
   color-scheme: dark;
 }
@@ -38,6 +42,10 @@ body {
   font-weight: 400;
   color: var(--foreground-primary);
   min-width: calc(var(--container-width) + 2 * var(--container-padding));
+}
+
+.--prevent-scroll {
+  overflow: hidden;
 }
 
 .container {
