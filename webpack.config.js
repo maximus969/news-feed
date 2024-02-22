@@ -49,7 +49,7 @@ module.exports = {
     alias: { '@components': path.resolve('./src/components') },
   },
   optimization: {
-    runTimeChunk: mode === 'production' ? false : 'single',
+    runtimeChunk: mode === 'production' ? false : 'single',
   },
   plugins: [
     new MiniCssExtractPlugin({
