@@ -40,7 +40,7 @@
 }
 
 .article-page__source {
-  color: var(--color-grey-2);
+  color: var(--constant-grey);
   cursor: pointer;
 }
 

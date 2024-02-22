@@ -4,3 +4,7 @@
   justify-content: flex-start;
   height: 76px;
 }
+
+.header-controls {
+  margin-left: auto;
+}

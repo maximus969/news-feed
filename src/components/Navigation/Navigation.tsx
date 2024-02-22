@@ -38,7 +38,6 @@ export const Navigation: FC<NavigationType> = ({ className = '' }) => {
       <ul className="navigation--list">
         <NavigationItem title="Новости" />
         {Object.entries(categoryTitles).map(([name, title]) => {
-          console.log('')
           return <NavigationItem key={name} name={name} title={title} />
         })}
       </ul>

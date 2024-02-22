@@ -1,6 +1,6 @@
 .partner-article {
   padding: 40px 0;
-  background-color: var(--color-accent);
+  background-color: var(--constant-accent);
 }
 
 .partner-article-image-container {
@@ -9,7 +9,7 @@
 
 .partner-article-content {
   grid-column: 7 / -1;
-  color: var(--color-white);
+  color: var(--constant-white);
   display: flex;
   justify-content: center;
   flex-direction: column;
