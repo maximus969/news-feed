@@ -1,6 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './ColorSchemeSwitcher.css'
 import { applyColorSceme, getSystemColorScheme, getSavedScheme, removeSavedScheme } from '../../colorSchemeUtils'
+import { AutoScheme } from '@components/Icons/AutoScheme'
+import { DarkScheme } from '@components/Icons/DarkScheme'
+import { LightScheme } from '@components/Icons/LightScheme'
+import { Dropdown } from '@components/Dropdown/Dropdown'
+import mark from '../../assets/mark.svg'
 
 type colorSchemeValues = 'dark' | 'light' | 'auto'
 
@@ -8,6 +13,8 @@ const matchMedia = window.matchMedia('(prefers-color-scheme:dark)')
 
 export const ColorSchemeSwitcher: React.FC = () => {
   const [userScheme, setUserScheme] = useState<colorSchemeValues>(getSavedScheme() || 'auto')
+  const [dropdownShown, setDropdownShown] = useState(false)
+  const targetRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     if (userScheme === 'auto') {
@@ -32,15 +39,36 @@ export const ColorSchemeSwitcher: React.FC = () => {
     }
   }, [userScheme])
 
+  const onDropdownChange = () => {
+    setDropdownShown(!dropdownShown)
+  }
+
   return (
-    <select
-      className={'color-scheme-switcher'}
-      onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setUserScheme(e.target.value as colorSchemeValues)}
-      value={userScheme}
-    >
-      <option value="dark">Dark</option>
-      <option value="light">Light</option>
-      <option value="auto">Auto</option>
-    </select>
+    <div className="color-scheme-switcher">
+      <button className="color-scheme-switcher__value" ref={targetRef} onClick={onDropdownChange}>
+        {userScheme === 'auto' && <AutoScheme />}
+        {userScheme === 'dark' && <DarkScheme />}
+        {userScheme === 'light' && <LightScheme />}
+      </button>
+      <Dropdown shown={dropdownShown} onShownChange={setDropdownShown} targetRef={targetRef}>
+        <button className="color-scheme-switcher__option" onClick={() => setUserScheme('auto')}>
+          <AutoScheme />
+          <span className="color-scheme-switcher__text">Auto</span>
+          {userScheme === 'auto' && <img className="color-scheme-switcher__mark" src={mark} alt="Выбранная тема" />}
+        </button>
+
+        <button className="color-scheme-switcher__option" onClick={() => setUserScheme('dark')}>
+          <DarkScheme />
+          <span className="color-scheme-switcher__text">Темная</span>
+          {userScheme === 'dark' && <img className="color-scheme-switcher__mark" src={mark} alt="Выбранная тема" />}
+        </button>
+
+        <button className="color-scheme-switcher__option" onClick={() => setUserScheme('light')}>
+          <LightScheme />
+          <span className="color-scheme-switcher__text">Светлая</span>
+          {userScheme === 'light' && <img className="color-scheme-switcher__mark" src={mark} alt="Выбранная тема" />}
+        </button>
+      </Dropdown>
+    </div>
   )
 }

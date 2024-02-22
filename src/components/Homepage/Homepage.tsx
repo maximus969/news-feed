@@ -8,6 +8,7 @@ import { categoryIds } from '../../utils'
 import { ArticleCard } from '@components/ArticleCard/ArticleCard'
 import { SidebarArticleCard } from '@components/SidebarArticleCard/SidebarArticleCard'
 import { Title } from '@components/Title/Title'
+import { mainUrl, trendsUrl } from '@components/apiUrls'
 
 type categoriesRecord = Record<Categories['id'], Categories>
 type sourcesRecord = Record<Sources['id'], Sources>
@@ -21,11 +22,9 @@ export const Homepage: React.FC = () => {
 
   useEffect(() => {
     Promise.all<NewsResponse>([
-      fetch('https://frontend.karpovcourses.net/api/v2/ru/news/').then((response) => response.json()),
-      fetch(`https://frontend.karpovcourses.net/api/v2/ru/news/${categoryIds['karpov.courses']}`).then((response) =>
-        response.json()
-      ),
-      fetch('https://frontend.karpovcourses.net/api/v2/ru/trends/').then((response) => response.json()),
+      fetch(mainUrl).then((response) => response.json()),
+      fetch(`${mainUrl}${categoryIds['karpov.courses']}`).then((response) => response.json()),
+      fetch(trendsUrl).then((response) => response.json()),
     ]).then(([articles, karpovArticles, trendArticles]) => {
       setArticles(articles.items), setKarpovArticles(karpovArticles.items), setTrendArticles(trendArticles.items)
 
