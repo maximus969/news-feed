@@ -5,7 +5,7 @@
 .navigation--list {
   list-style: none;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   margin-left: 24px;
 }
 
@@ -26,5 +26,5 @@
 
 .active,
 .navigation--link:hover {
-  color: var(--color-accent);
+  color: var(--constant-accent);
 }

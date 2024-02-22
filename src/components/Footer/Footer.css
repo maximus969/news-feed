@@ -1,13 +1,13 @@
 .footer {
   padding-top: 22px;
   padding-bottom: 56px;
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: var(--constant-black);
+  color: var(--constant-white);
   margin-top: 64px;
 }
 
 .footer--link {
-  color: var(--color-accent);
+  color: var(--constant-accent);
   text-decoration: underline;
   cursor: pointer;
 }

@@ -4,7 +4,7 @@
 }
 
 .sidebar-article-card:hover {
-  color: var(--color-accent);
+  color: var(--constant-accent);
 }
 
 .sidebar-article-card__media {
@@ -30,7 +30,7 @@
 }
 
 .sidebar-article-card__source {
-  color: var(--color-grey-2);
+  color: var(--constant-grey);
 }
 
 .sidebar-article-card__date {
