@@ -6,8 +6,8 @@ export const Header: React.FC = () => {
   return (
     <div>
       <header className="header">
-        <div className="container">
-          <Navigation placement="header" className="header__navigation" />
+        <div className="container header-container">
+          <Navigation className="header--navigation" />
         </div>
       </header>
     </div>

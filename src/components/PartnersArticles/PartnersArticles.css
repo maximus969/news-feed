@@ -5,10 +5,6 @@
 
 .partner-article-image-container {
   grid-column: span 6;
-  position: relative;
-  overflow: hidden;
-  max-height: 430px;
-  border-radius: 10px;
 }
 
 .partner-article-content {

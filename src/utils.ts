@@ -1,31 +1,19 @@
-type categoryIdsType = {
-  [index: string]: number | string
-  sport: number
-  technologies: number
-  karpov: number
-  fashion: number
-}
+import { categoryNames } from 'types'
 
-type categoryNamesType = {
-  [index: string]: string
-  sport: string
-  technologies: string
-  karpov: string
-  fashion: string
-}
-
-export const categoryIds: categoryIdsType = {
-  index: 0,
+export const categoryIds: Record<categoryNames, number> = {
   sport: 2,
-  technologies: 1,
-  karpov: 6,
+  tech: 1,
+  ['karpov.courses']: 6,
   fashion: 3,
-} as const
+  other: 5,
+  politics: 4,
+}
 
-export const categoryNames: categoryNamesType = {
-  index: 'Главная',
+export const categoryTitles: Record<categoryNames, string> = {
   fashion: 'Мода',
-  technologies: 'Технологии',
+  tech: 'Технологии',
   sport: 'Спорт',
-  karpov: 'Karpov',
+  ['karpov.courses']: 'Karpov',
+  other: 'Прочее',
+  politics: 'Политика',
 }

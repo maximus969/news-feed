@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import './Article.css'
-import { RelatedSmallArticle } from '../RelatedSmallArticle/RelatedSmallArticle'
-import { SingleLineTitleArticle } from '../SingleLineTitleArticle/SingleLineTitleArticle'
-import { ArticleItem, Categories, Items, RelatedArticleItem, Sources } from '../../types'
+import {
+  ArticleItem,
+  Items,
+  RelatedArticleItem,
+  Sources as SourcesType,
+  beautifyDate,
+  categoryNames,
+} from '../../types'
 import { useParams } from 'react-router-dom'
-import { ArticleItemInfo } from '../ArticleItemInfo/ArticleItemInfo'
+import { SidebarArticleCard } from '@components/SidebarArticleCard/SidebarArticleCard'
+import { Hero } from '@components/Hero/Hero'
+import { ArticleCard } from '@components/ArticleCard/ArticleCard'
+import { Source } from '@components/Source/Source'
+import { Title } from '@components/Title/Title'
+import { categoryTitles } from '../../utils'
 
 export const Article: React.FC = () => {
   const { id }: { id?: number } = useParams()
   const [articleItem, setArticleItem] = useState<ArticleItem | null>(null)
   const [relatedArticles, setRelatedArticles] = useState<Items[] | null>(null)
-  const [categories, setCategories] = useState<Categories[] | null>([])
-  const [sources, setSources] = useState<Sources[] | null>([])
+  const [sources, setSources] = useState<SourcesType[] | null>([])
 
   useEffect(() => {
     fetch(`https://frontend.karpovcourses.net/api/v2/news/full/${id}`)
@@ -20,16 +29,12 @@ export const Article: React.FC = () => {
 
     Promise.all([
       fetch(`https://frontend.karpovcourses.net/api/v2/news/related/${id}?count=9`).then((response) => response.json()),
-      fetch(`https://frontend.karpovcourses.net/api/v2/categories`).then((response) => response.json()),
       fetch(`https://frontend.karpovcourses.net/api/v2/sources`).then((response) => response.json()),
     ]).then((response) => {
       const articles: RelatedArticleItem = response[0]
       setRelatedArticles(articles.items)
 
-      const categories = response[1]
-      setCategories(categories)
-
-      const sources = response[2]
+      const sources = response[1]
       setSources(sources)
     })
   }, [id])
@@ -38,60 +43,35 @@ export const Article: React.FC = () => {
     return null
   }
 
-  const renderArticleItemInfo = (articleItem: ArticleItem) => {
-    return (
-      <ArticleItemInfo
-        categoryName={articleItem.category.name}
-        date={articleItem.date}
-        sourceLink={articleItem.source?.site}
-        sourceName={articleItem.source.name}
-        author={articleItem.author}
-      />
-    )
-  }
-
   return (
     <section className="article-page">
-      <article className="article">
-        {articleItem?.image?.length ? (
-          <section
-            className="article__hero"
-            style={{
-              backgroundImage: `url(${articleItem?.image})`,
-            }}
-          >
-            <div className="container article__hero-content">
-              <div className="grid">
-                <h1 className="article__hero-title">{articleItem?.title}</h1>
-              </div>
-              {renderArticleItemInfo(articleItem)}
-            </div>
-          </section>
-        ) : null}
+      <Hero title={articleItem.title} image={articleItem.image} className="article-page__hero" />
 
-        <div className="grid container article__main">
-          <div className="article__content">
-            {!articleItem?.image?.length && (
-              <div className="article__title-container">
-                <h1 className="article__title">{articleItem?.title}</h1>
-                {renderArticleItemInfo(articleItem)}
-              </div>
-            )}
-
+      <div className="container article-page__main">
+        <div className="article-page__info">
+          <span className="article-page__category">{articleItem.category.name}</span>
+          <span className="article-page__date">{beautifyDate(articleItem.date)}</span>
+          {articleItem && articleItem.link.length > 0 && (
+            <Source className={'article-page__source'} href={articleItem.link}>
+              {categoryTitles[articleItem.source?.name as categoryNames]}
+            </Source>
+          )}
+        </div>
+        <div className="grid">
+          <div className="article-page__content">
             <p>{articleItem?.text}</p>
-            <img src={articleItem?.image} />
           </div>
 
-          <div className="article__small-column">
+          <div className="sidebar__article-page">
             {relatedArticles.slice(3, 9).map((item) => {
-              const category = categories?.find(({ id }) => item.category_id === id)
               const source = sources?.find(({ id }) => item.source_id === id)
               return (
-                <RelatedSmallArticle
+                <SidebarArticleCard
+                  className="sidebar__article-item"
+                  date={item.date}
                   id={item.id}
                   key={item.id}
                   title={item.title}
-                  category={category?.name || ''}
                   source={source?.name || ''}
                   image={item.image}
                 />
@@ -99,23 +79,24 @@ export const Article: React.FC = () => {
             })}
           </div>
         </div>
-      </article>
+      </div>
 
       <section className="article-page__related-articles">
         <div className="container">
-          <h2 className="article-page__related-articles-title">{articleItem?.title}</h2>
+          <Title Component={'h2'} className="article-page__related-articles-title">
+            Читайте также
+          </Title>
 
           <div className="grid article-page__related-articles-list">
             {relatedArticles?.slice(0, 3).map((article) => {
-              const category = categories?.find(({ id }) => article?.category_id === id)
               const source = sources?.find(({ id }) => article?.source_id === id)
               return (
-                <SingleLineTitleArticle
+                <ArticleCard
+                  className="article-page__related-articles-item"
                   key={article.id}
-                  image={article.image}
-                  source={source?.name || ''}
-                  category={category?.name || ''}
-                  text={article.description}
+                  date={article.date}
+                  source={source?.name}
+                  description={article.description}
                   title={article.title}
                   id={article.id}
                 />
