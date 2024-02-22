@@ -6,15 +6,12 @@ export const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="container">
-        <Navigation placement="footer" className="footer__navigation" />
-        <div className="footer__bottom">
-          <p className="footer__text">
-            Сделано на Frontend курсе в{' '}
-            <a rel="noreferrer" className="footer__link" href="https://karpov.courses/frontend" target="_blank">
-              Karpov.Courses
-            </a>
-          </p>
-          <p className="footer__text footer__text--gray">© 2021</p>
+        <Navigation className="footer--navigation" />
+        <div className="footer--bottom">
+          Сделано на Frontend курсе в &nbsp;
+          <a rel="noreferrer" className="footer--link" href="https://karpov.courses/frontend" target="_blank">
+            Karpov.Courses
+          </a>
         </div>
       </div>
     </footer>
