@@ -1,14 +1,14 @@
 import React, { Reducer, useReducer, useState } from 'react'
 import './LoginContainer.css'
-import { LoginField, LoginForm } from '@components/LoginForm/LoginForm'
-import { validateEmail } from './utils'
-import { ALLOWED_OAUTH_PROVIDERS, useAuthContext } from '../AuthContextProvider'
 import { Link, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 import GoogleIcon from '@mui/icons-material/Google'
 import LoginIcon from '@mui/icons-material/Login'
 import { ProviderId, UserCredential } from 'firebase/auth'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import { LoginField, LoginForm } from '../components/LoginForm/LoginForm'
+import { ALLOWED_OAUTH_PROVIDERS, useAuthContext } from '../AuthContextProvider'
+import { validateEmail } from './utils'
 
 type LoginStateType = Omit<LoginField, 'onFieldChange'>
 

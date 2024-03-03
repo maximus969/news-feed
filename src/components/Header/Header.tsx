@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navigation } from '../Navigation/Navigation'
 import './Header.css'
-import { ColorSchemeSwitcher } from '@components/ColorSchemeSwitcher/ColorSchemeSwitcher'
+import { ColorSchemeSwitcher } from '../../Features/colorScheme/components/ColorSchemeSwitcher/ColorSchemeSwitcher'
 
 export const Header: React.FC = () => {
   return (
@@ -9,9 +9,7 @@ export const Header: React.FC = () => {
       <header className="header">
         <div className="container header-container">
           <Navigation className="header--navigation" />
-          <div className="header-controls">
-            <ColorSchemeSwitcher />
-          </div>
+          <div className="header-controls">{/* <ColorSchemeSwitcher /> */}</div>
         </div>
       </header>
     </div>

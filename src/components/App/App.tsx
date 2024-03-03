@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-
-import { Homepage } from '../Homepage/Homepage'
-import { Article } from '../Article/Article'
-
-import { AdminPanel } from '../Admin/AdminPanel'
+import { Homepage } from '../../Features/articlesList/components/Homepage/Homepage'
+import { Article } from '../../Features/ArticleItem/components/ArticlePage/ArticlesPage'
+import { AdminPanel } from '../../Features/Admin/AdminPanel/AdminPanel'
 import { Page } from '../Page/Page'
-import { AdminArticlesItem } from '../AdminArticlesItem/AdminArticlesItem'
-import { AdminArticles } from '../AdminArticles/AdminArticles'
-import { RequireAuth } from '../RequireAuth/RequireAuth'
+import { AdminArticlesItem } from '../../Features/Admin/AdminArticlesItem/AdminArticlesItem'
+import { AdminArticles } from '../../Features/Admin/AdminArticles/AdminArticles'
+import { RequireAuth } from '../../Features/Auth/components/RequireAuth/RequireAuth'
 import { LoginContainer } from '../../Features/Auth/Login/LoginContainer'
-import { CategoryPage } from '@components/CategoryPage/CategoryPage'
+import { CategoryPage } from '../../Features/categoryArticles/CategoryPage/CategoryPage'
 
 export const App: React.FC = () => {
   const { pathname } = useLocation()
