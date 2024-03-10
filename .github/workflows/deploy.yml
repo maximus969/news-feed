@@ -21,6 +21,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      - name: Clear npm cache
+      - run: npm cache clean --force
       - run: npm i
       - run: npm run eslint
       - run: npm run stylelint
