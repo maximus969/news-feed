@@ -1,5 +1,5 @@
 import { RootState } from '@components/store'
-import { ArticleType } from '../articleItem/types'
+import { ArticleType } from '../ArticleItem/types'
 
 export const getCategoryNews =
   (categoryId: number) =>

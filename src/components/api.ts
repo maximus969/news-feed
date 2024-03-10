@@ -1,4 +1,4 @@
-import { ArticleItemType } from '../features/articleItem/types'
+import { ArticleItemType } from '../features/ArticleItem/types'
 import { NewsResponse } from '../features/articlesList/types'
 import { CategoriesType } from '../features/categories/types'
 import { PartnersPostsType } from '../features/partnersArticles/types'

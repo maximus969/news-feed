@@ -1,4 +1,4 @@
-import { ArticleType } from '../articleItem/types'
+import { ArticleType } from '../ArticleItem/types'
 
 export interface RelatedArticlesType {
   items: ArticleType[]
