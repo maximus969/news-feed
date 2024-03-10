@@ -5,7 +5,7 @@ import './common.css'
 import { initializeAPI } from './api'
 import { App } from './App/App'
 import { Provider } from 'react-redux'
-import { AuthContextProvider } from '../Features/Auth/AuthContextProvider'
+import { AuthContextProvider } from '../features/Auth/AuthContextProvider'
 import { store } from './store'
 
 const firebaseApp = initializeAPI()
