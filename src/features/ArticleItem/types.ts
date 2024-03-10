@@ -1,4 +1,4 @@
-import { SourcesType } from '../source/types'
+import { SourcesType } from '../Source/types'
 import { CategoriesType } from '../categories/types'
 
 export type ArticleItemType = {

@@ -1,14 +1,14 @@
+import { AdminArticles } from '../../features/Admin/AdminArticles/AdminArticles'
+import { AdminArticlesItem } from '../../features/Admin/AdminArticlesItem/AdminArticlesItem'
+import { AdminPanel } from '../../features/Admin/AdminPanel/AdminPanel'
+import { Article } from '../../features/ArticleItem/components/ArticlePage/ArticlesPage'
+import { Homepage } from '../../features/articlesList/components/Homepage/Homepage'
+import { RequireAuth } from '../../features/Auth/components/RequireAuth/RequireAuth'
+import { LoginContainer } from '../../features/Auth/Login/LoginContainer'
+import { CategoryPage } from '../../features/categoryArticles/CategoryPage/CategoryPage'
 import React, { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { Homepage } from '../../Features/articlesList/components/Homepage/Homepage'
-import { Article } from '../../Features/ArticleItem/components/ArticlePage/ArticlesPage'
-import { AdminPanel } from '../../Features/Admin/AdminPanel/AdminPanel'
 import { Page } from '../Page/Page'
-import { AdminArticlesItem } from '../../Features/Admin/AdminArticlesItem/AdminArticlesItem'
-import { AdminArticles } from '../../Features/Admin/AdminArticles/AdminArticles'
-import { RequireAuth } from '../../Features/Auth/components/RequireAuth/RequireAuth'
-import { LoginContainer } from '../../Features/Auth/Login/LoginContainer'
-import { CategoryPage } from '../../Features/categoryArticles/CategoryPage/CategoryPage'
 
 export const App: React.FC = () => {
   const { pathname } = useLocation()

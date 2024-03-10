@@ -3,7 +3,7 @@ import './Navigation.css'
 import { Logo } from '@components/Logo/Logo'
 import classNames from 'classnames'
 import { NavLink } from 'react-router-dom'
-import { categoryTitles } from '../../Features/categories/constants'
+import { categoryTitles } from '../../features/categories/constants'
 
 type NavigationType = {
   className: string

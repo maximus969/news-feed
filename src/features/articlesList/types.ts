@@ -1,5 +1,5 @@
-import { SourcesType } from '../source/types'
-import { ArticleType } from '../articleItem/types'
+import { SourcesType } from '../Source/types'
+import { ArticleType } from '../ArticleItem/types'
 import { CategoriesType } from '../categories/types'
 
 export type NewsResponse = {

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { SidebarArticleCard } from '../../../../components/SidebarArticleCard/SidebarArticleCard'
 import { Hero } from '@components/Hero/Hero'
 import { ArticleCard } from '../../../../components/ArticleCard/ArticleCard'
-import { Source } from '../../../source/components/Source'
+import { Source } from '../../../Source/components/Source'
 import { Title } from '@components/Title/Title'
 import { beautifyDate } from '../../../../components/utils'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchRelatedArticles } from '../../../relatedNews/actions'
 import { categoryNames } from '../../../categories/types'
 import { categoryTitles } from '../../../categories/constants'
-import { getSources } from '../../../source/selectors'
+import { getSources } from '../../../Source/selectors'
 import { getRelatedArticles } from '../../../relatedNews/selectors'
 import { getCachedArticleItem } from '../../selectors'
 import { fetchArticleItem } from '../../actions'
@@ -40,7 +40,7 @@ export const Article: React.FC = () => {
 
       <div className="container article-page__main">
         <div className="article-page__info">
-          <span className="article-page__category">{articleItem.category.name}</span>
+          <span className="article-page__category">{articleItem.category?.name}</span>
           <span className="article-page__date">{beautifyDate(articleItem.date)}</span>
           {articleItem && articleItem.link.length > 0 && (
             <Source className={'article-page__source'} href={articleItem.link}>
