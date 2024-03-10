@@ -1,4 +1,4 @@
-import { SourcesType } from '../source/types'
+import { SourcesType } from '../Source/types'
 import { ArticleType } from '../articleItem/types'
 import { CategoriesType } from '../categories/types'
 

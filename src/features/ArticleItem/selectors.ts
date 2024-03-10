@@ -1,9 +1,9 @@
 import { RootState } from '@components/store'
 import { getCategories } from '../categories/selectors'
 import { CategoriesType } from '../categories/types'
-import { getSources } from '../source/selectors'
+import { getSources } from '../Source/selectors'
 import { ArticleItemType } from './types'
-import { SourcesType } from '../source/types'
+import { SourcesType } from '../Source/types'
 
 export const getArticleItem = (state: RootState): ArticleItemType | null => state.articleItem.item
 

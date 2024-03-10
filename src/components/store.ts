@@ -1,5 +1,5 @@
 import { PayloadAction, configureStore, ThunkDispatch, ThunkAction } from '@reduxjs/toolkit'
-import { sourcesReducer } from '../features/source/slice'
+import { sourcesReducer } from '../features/Source/slice'
 import { relatedArticlesReducer } from '../features/relatedNews/slice'
 import { categoryArticlesReducer } from '../features/categoryArticles/slice'
 import { categoriesReducer } from '../features/categories/slice'

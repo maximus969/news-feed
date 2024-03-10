@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { beautifyDate } from '../utils'
 import { categoryNames } from '../../features/categories/types'
 import { categoryTitles } from '../../features/categories/constants'
-import { Source } from '../../features/source/components/Source'
+import { Source } from '../../features/Source/components/Source'
 
 type ArticleCardType = {
   id: number

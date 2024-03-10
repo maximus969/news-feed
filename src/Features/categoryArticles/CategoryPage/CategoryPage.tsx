@@ -10,7 +10,7 @@ import { categoryNames } from '../../categories/types'
 import { getCategoryNews } from '../selectors'
 import { categoryIds, categoryTitles } from '../../categories/constants'
 import { getCategories } from '../../categories/selectors'
-import { getSources } from '../../source/selectors'
+import { getSources } from '../../Source/selectors'
 import { fetchCategoryArticles } from '../actions'
 import { PartnersArticles } from '../../partnersArticles/components/PartnersArticles'
 

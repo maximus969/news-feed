@@ -14,7 +14,7 @@ import {
   limit,
 } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { SourcesType } from '../features/source/types'
+import { SourcesType } from '../features/Source/types'
 import { PartnersPostsType } from '../features/partnersArticles/types'
 import { NewsResponse } from '../features/articlesList/types'
 import { CategoriesType } from '../features/categories/types'
