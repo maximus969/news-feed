@@ -2,12 +2,13 @@ import React from 'react'
 import './ArticleCard.css'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
-import { beautifyDate, categoryNames } from '../../types'
-import { Source } from '@components/Source/Source'
-import { categoryTitles } from '../../utils'
+import { beautifyDate } from '../utils'
+import { categoryNames } from '../../Features/categories/types'
+import { categoryTitles } from '../../Features/categories/constants'
+import { Source } from '../../Features/source/components/Source'
 
 type ArticleCardType = {
-  id: string
+  id: number
   title: string
   image?: string
   category?: categoryNames
@@ -18,7 +19,7 @@ type ArticleCardType = {
 }
 
 export const ArticleCard: React.FC<ArticleCardType> = ({
-  id = '',
+  id,
   title = '',
   image = '',
   category,

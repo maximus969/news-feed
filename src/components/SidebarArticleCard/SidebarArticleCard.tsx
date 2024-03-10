@@ -2,10 +2,10 @@ import React from 'react'
 import './SidebarArticleCard.css'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
-import { beautifyDate } from '../../types'
+import { beautifyDate } from '@components/utils'
 
 type ArticleCardType = {
-  id: string
+  id: number
   title: string
   source: string
   image: string

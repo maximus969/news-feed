@@ -14,8 +14,8 @@ const mode = process.env.NODE_ENV || 'production'
 module.exports = {
   mode: mode,
   entry: {
-    main: './src/script.tsx',
-    initColorScheme: './src/initColorScheme.ts',
+    main: './src/components/script.tsx',
+    initColorScheme: './src/features/colorScheme/initColorScheme.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -34,7 +34,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.svg$/,
+        test: /\.(svg|jpg)$/,
         type: 'asset/resource',
       },
       {
