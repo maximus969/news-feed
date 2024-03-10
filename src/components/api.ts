@@ -1,3 +1,9 @@
+import { ArticleItemType } from '../features/articleItem/types'
+import { NewsResponse } from '../features/articlesList/types'
+import { CategoriesType } from '../features/categories/types'
+import { PartnersPostsType } from '../features/partnersArticles/types'
+import { RelatedArticlesType } from '../features/relatedNews/types'
+import { SourcesType } from '../features/Source/types'
 import { FirebaseApp, initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import {
@@ -14,12 +20,6 @@ import {
   limit,
 } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { SourcesType } from '../features/Source/types'
-import { PartnersPostsType } from '../features/partnersArticles/types'
-import { NewsResponse } from '../features/articlesList/types'
-import { CategoriesType } from '../features/categories/types'
-import { RelatedArticlesType } from '../features/relatedNews/types'
-import { ArticleItemType } from '../Features/articleItem/types'
 
 export const initializeAPI = (): FirebaseApp => {
   const firebaseApp = initializeApp({
