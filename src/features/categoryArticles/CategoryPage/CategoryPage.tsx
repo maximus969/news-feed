@@ -27,7 +27,11 @@ export const CategoryPage: React.FC = () => {
 
   return (
     <section className="category-page">
-      <Hero title={categoryTitles[category as categoryNames]} image="test" className="category-page__hero" />
+      <Hero
+        title={categoryTitles[category as categoryNames]}
+        image={require(`../../../images/categories/${category}.jpg`)}
+        className="category-page__hero"
+      />
       <div className="container grid">
         <section className="category-page__content">
           {articles.slice(3).map((item) => {

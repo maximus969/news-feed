@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from 'react'
 import './EmailModal.css'
-import cross from '../../assets/cross.svg'
+import cross from '../../images/cross.svg'
 import { ModalWrapper } from '@components/ModalWrapper/ModalWrapper'
 import { Button } from '@components/Button/Button'
 import { subscribeUrl } from '@components/apiUrls'
