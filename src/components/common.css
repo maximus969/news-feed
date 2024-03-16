@@ -6,7 +6,9 @@
 }
 
 :root {
-  --constant-overlay-black-alpha64: rgba(0, 0, 0, 0.64);
+  --constant-black-alpha64: rgba(0, 0, 0, 0.64);
+  --constant-white-alpha12: rgba(255, 255, 255, 0.12);
+  --constant-white-alpha64: rgba(255, 255, 255, 0.64);
   --constant-black: #262a2f;
   --constant-accent: #0083fc;
   --constant-grey: #a3a3a3;
@@ -17,10 +19,12 @@
   --background-primary: var(--constant-white);
   --foreground-primary: var(--constant-black);
   --color-scheme-border: var(--constant-grey1);
+  --skeleton-background: var(var(--constant-grey));
   --container-width: 940px;
   --grid-column-width: 60px;
   --container-padding: 20px;
   --grid-gap: 20px;
+  --skeleton-gradient: linear-gradient(to right, transparent 0%, var(--constant-black-alpha64) 100%);
 
   color-scheme: light;
 }
@@ -29,6 +33,8 @@
   --background-zero: #131517;
   --background-primary: var(--constant-black);
   --foreground-primary: var(--constant-white);
+  --skeleton-background: var(--constant-white-alpha12);
+  --skeleton-gradient: linear-gradient(to right, transparent 0%, var(--constant-white-alpha12) 100%);
   --color-scheme-border: transparent;
 
   color-scheme: dark;
@@ -42,6 +48,10 @@ body {
   font-weight: 400;
   color: var(--foreground-primary);
   min-width: calc(var(--container-width) + 2 * var(--container-padding));
+}
+
+a {
+  cursor: pointer;
 }
 
 .--prevent-scroll {
@@ -58,4 +68,21 @@ body {
   display: grid;
   grid-template-columns: repeat(12, var(--grid-column-width));
   gap: var(--grid-gap);
+}
+
+.skeleton-gradient {
+  background-size: 200% 100%;
+  background-attachment: fixed;
+  background-image: var(--skeleton-gradient);
+  animation: skeleton-gradient-animation 1s linear infinite;
+}
+
+@keyframes skeleton-gradient-animation {
+  from {
+    background-size: 100% 0;
+  }
+
+  to {
+    background-size: -100% 0;
+  }
 }

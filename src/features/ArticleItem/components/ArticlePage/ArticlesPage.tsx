@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './ArticlesPage.css'
 import { useParams } from 'react-router-dom'
 import { SidebarArticleCard } from '../../../../components/SidebarArticleCard/SidebarArticleCard'
@@ -6,7 +6,7 @@ import { Hero } from '@components/Hero/Hero'
 import { ArticleCard } from '../../../../components/ArticleCard/ArticleCard'
 import { Source } from '../../../Source/components/Source'
 import { Title } from '@components/Title/Title'
-import { beautifyDate } from '../../../../components/utils'
+import { beautifyDate, repeat } from '../../../../components/utils'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { fetchRelatedArticles } from '../../../relatedNews/actions'
@@ -17,6 +17,9 @@ import { getRelatedArticles } from '../../../relatedNews/selectors'
 import { getCachedArticleItem } from '../../selectors'
 import { fetchArticleItem } from '../../actions'
 import { AppDispatchType } from '@components/store'
+import { HeroSkeleton } from '@components/Hero/HeroSkeleton'
+import { SkeletonText } from '@components/Skeleton/SkeletonText'
+import { SidebarArticleCardSkeleton } from '@components/SidebarArticleCard/SidebarArticleCardSkeleton'
 
 export const Article: React.FC = () => {
   const { id }: { id?: number } = useParams()
@@ -24,14 +27,43 @@ export const Article: React.FC = () => {
   const articleItem = useSelector(getCachedArticleItem(Number(id)))
   const relatedArticles = useSelector(getRelatedArticles(Number(id)))
   const sources = useSelector(getSources)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    dispatch(fetchArticleItem(Number(id)))
-    dispatch(fetchRelatedArticles(Number(id)))
+    setLoading(true)
+    Promise.all([dispatch(fetchArticleItem(Number(id))), dispatch(fetchRelatedArticles(Number(id)))]).then(() =>
+      setLoading(false)
+    )
   }, [id])
 
   if (articleItem === null || relatedArticles === null) {
     return null
+  }
+
+  if (loading) {
+    return (
+      <section className="article-page">
+        <HeroSkeleton hasText={true} className="article-page__hero" />
+        <div className="container article-page__main">
+          <div className="article-page__info">
+            <SkeletonText />
+          </div>
+          <div className="grid">
+            <div className="article-page__content">
+              <p>
+                <SkeletonText rowsCount={6} />
+              </p>
+            </div>
+
+            <div className="sidebar__article-page">
+              {repeat((i) => {
+                return <SidebarArticleCardSkeleton key={i} className="sidebar__article-item" />
+              }, 3)}
+            </div>
+          </div>
+        </div>
+      </section>
+    )
   }
 
   return (

@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes } from 'react'
-import loader from '../../assets/loader.svg'
+import loader from '../../images/loader.svg'
 import './Button.css'
 
 interface ButtonType extends ButtonHTMLAttributes<HTMLButtonElement> {

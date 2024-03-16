@@ -5,7 +5,7 @@ import { AutoScheme } from '@components/Icons/AutoScheme'
 import { DarkScheme } from '@components/Icons/DarkScheme'
 import { LightScheme } from '@components/Icons/LightScheme'
 import { Dropdown } from '@components/Dropdown/Dropdown'
-import mark from '../../../../assets/mark.svg'
+import mark from '../../../../images/mark.svg'
 
 type colorSchemeValues = 'dark' | 'light' | 'auto'
 
