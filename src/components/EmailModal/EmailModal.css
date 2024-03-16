@@ -28,7 +28,6 @@
 
 .email-modal__link {
   color: var(--constant-accent);
-  cursor: pointer;
 }
 
 .email-modal__form {

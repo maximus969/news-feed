@@ -6,15 +6,19 @@ import { Homepage } from '../../features/articlesList/components/Homepage/Homepa
 import { RequireAuth } from '../../features/Auth/components/RequireAuth/RequireAuth'
 import { LoginContainer } from '../../features/Auth/Login/LoginContainer'
 import { CategoryPage } from '../../features/categoryArticles/CategoryPage/CategoryPage'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { Page } from '../Page/Page'
 
 export const App: React.FC = () => {
   const { pathname } = useLocation()
+  const prevPathname = useRef(pathname)
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    if (pathname !== prevPathname.current) {
+      prevPathname.current = pathname
+      window.scrollTo(0, 0)
+    }
   }, [pathname])
 
   return (

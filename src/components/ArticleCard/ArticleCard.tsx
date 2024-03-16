@@ -6,6 +6,7 @@ import { beautifyDate } from '../utils'
 import { categoryNames } from '../../features/categories/types'
 import { categoryTitles } from '../../features/categories/constants'
 import { Source } from '../../features/Source/components/Source'
+import { ImageComponent } from '@components/Image/ImageComponent'
 
 type ArticleCardType = {
   id: number
@@ -35,7 +36,7 @@ export const ArticleCard: React.FC<ArticleCardType> = ({
       to={`/article/${id}`}
       className={classNames('article-card', { 'article-card__has-description': hasDescription }, className)}
     >
-      {hasImage && <img className="article-card__image" src={image} alt="" />}
+      {hasImage && <ImageComponent className="article-card__image" src={image} alt="" />}
       <div className="article-card__content">
         <h2 className="article-card__title">{title}</h2>
         {hasDescription && <span className="article-card__description">{description}</span>}

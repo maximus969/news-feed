@@ -3,6 +3,7 @@ import './SidebarArticleCard.css'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { beautifyDate } from '@components/utils'
+import { ImageComponent } from '@components/Image/ImageComponent'
 
 type ArticleCardType = {
   id: number
@@ -18,7 +19,7 @@ export const SidebarArticleCard: React.FC<ArticleCardType> = ({ id, title, sourc
     <>
       <Link to={`/article/${id}`} className={classNames('sidebar-article-card', className)}>
         <div className="sidebar-article-card__media">
-          <img className="sidebar-article-card__image" src={image} alt="Изображение карточки новости" />
+          <ImageComponent className="sidebar-article-card__image" src={image} alt="Изображение карточки новости" />
           <div className="sidebar-article-card__date">{beautifyDate(date)}</div>
         </div>
         <h3 className="sidebar-article-card__title">{title}</h3>
