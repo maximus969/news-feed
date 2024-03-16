@@ -9,7 +9,9 @@ export const Header: React.FC = () => {
       <header className="header">
         <div className="container header-container">
           <Navigation className="header--navigation" />
-          <div className="header-controls">{/* <ColorSchemeSwitcher /> */}</div>
+          <div className="header-controls">
+            <ColorSchemeSwitcher />
+          </div>
         </div>
       </header>
     </div>

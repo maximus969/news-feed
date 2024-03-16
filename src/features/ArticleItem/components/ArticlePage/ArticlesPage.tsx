@@ -72,7 +72,7 @@ export const Article: React.FC = () => {
 
       <div className="container article-page__main">
         <div className="article-page__info">
-          <span className="article-page__category">{articleItem.category.name}</span>
+          <span className="article-page__category">{articleItem.category?.name}</span>
           <span className="article-page__date">{beautifyDate(articleItem.date)}</span>
           {articleItem && articleItem.link.length > 0 && (
             <Source className={'article-page__source'} href={articleItem.link}>
