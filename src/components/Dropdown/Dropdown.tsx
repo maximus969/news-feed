@@ -3,6 +3,7 @@ import './Dropdown.css'
 import throttle from 'lodash.throttle'
 import { createPortal } from 'react-dom'
 import classNames from 'classnames'
+import { CSSTransition } from 'react-transition-group'
 
 interface DropdownType extends HTMLAttributes<HTMLElement> {
   targetRef: RefObject<HTMLElement>
@@ -56,12 +57,12 @@ export const Dropdown: React.FC<DropdownType> = ({
     }
   }, [shown, onShownChange])
 
-  return shown
-    ? createPortal(
-        <div className={classNames('dropdown', className)} style={{ ...style, ...coords }} {...rest}>
-          {children}
-        </div>,
-        document.getElementById('overlay') as HTMLElement
-      )
-    : null
+  return createPortal(
+    <CSSTransition in={shown} classNames={'dropdown-animation'} mountOnEnter={true} unmountOnExit={true} timeout={200}>
+      <div className={classNames('dropdown', className)} style={{ ...style, ...coords }} {...rest}>
+        {children}
+      </div>
+    </CSSTransition>,
+    document.getElementById('overlay') as HTMLElement
+  )
 }

@@ -1,0 +1,15 @@
+.page-animation-exit {
+  opacity: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  transition: opacity 1000ms ease, transform 1000ms ease;
+  transform: scale(1);
+  transform-origin: center center;
+}
+
+.page-animation-exit-active {
+  opacity: 0;
+  transform: scale(1.1);
+}
