@@ -53,10 +53,6 @@ a {
   cursor: pointer;
 }
 
-.--prevent-scroll {
-  overflow: hidden;
-}
-
 .container {
   margin: 0 auto;
   padding: 0 var(--container-padding);
@@ -642,6 +638,24 @@ a {
   padding: 8px 0;
 }
 
+.dropdown-animation-enter {
+  transform: scale(0.2);
+  transform-origin: right top;
+  transition: transform 200ms ease-in;
+}
+
+.dropdown-animation-enter-active {
+  transform: scale(1);
+}
+
+.dropdown-animation-exit {
+  transform: scale(1);
+}
+
+.dropdown-animation-exit-active {
+  transform: scale(0);
+}
+
 .email-modal {
   width: 522px;
   position: relative;
@@ -716,6 +730,28 @@ a {
   justify-content: center;
 }
 
+.modal-wrapper-animation-enter {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
+
+.modal-wrapper-animation-enter-active {
+  opacity: 1;
+}
+
+.modal-wrapper-animation-exit {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.modal-wrapper-animation-exit-active {
+  opacity: 0;
+}
+
+.--prevent-scroll {
+  overflow: hidden;
+}
+
 .button {
   font-weight: 500;
   font-size: 16px;
@@ -760,5 +796,21 @@ a {
   to {
     transform: rotate(360deg);
   }
+}
+
+.page-animation-exit {
+  opacity: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  transition: opacity 1000ms ease, transform 1000ms ease;
+  transform: scale(1);
+  transform-origin: center center;
+}
+
+.page-animation-exit-active {
+  opacity: 0;
+  transform: scale(1.1);
 }
 
