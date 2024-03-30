@@ -2,19 +2,22 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { ArticleItemType } from './types'
 
 interface initialArticleItemType {
-  item: ArticleItemType | null
+  items: Record<number, ArticleItemType>
 }
 
 const initialArticleItemState: initialArticleItemType = {
-  item: null,
+  items: {},
 }
 
 export const articleItemSlice = createSlice({
   name: 'articleItem',
   initialState: initialArticleItemState,
   reducers: {
-    setArticleItem: (state, action: PayloadAction<ArticleItemType | null>) => {
-      state.item = action.payload
+    setArticleItem: (state, action: PayloadAction<ArticleItemType>) => {
+      state.items = {
+        ...state.items,
+        [action.payload?.id]: action.payload,
+      }
     },
   },
 })

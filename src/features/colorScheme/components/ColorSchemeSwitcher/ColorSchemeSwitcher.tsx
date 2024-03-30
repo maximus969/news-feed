@@ -45,7 +45,14 @@ export const ColorSchemeSwitcher: React.FC = () => {
 
   return (
     <div className="color-scheme-switcher">
-      <button className="color-scheme-switcher__value" ref={targetRef} onClick={onDropdownChange}>
+      <button
+        className="color-scheme-switcher__value"
+        ref={targetRef}
+        onClick={(e) => {
+          e.stopPropagation()
+          onDropdownChange()
+        }}
+      >
         {userScheme === 'auto' && <AutoScheme />}
         {userScheme === 'dark' && <DarkScheme />}
         {userScheme === 'light' && <LightScheme />}

@@ -54,10 +54,6 @@ a {
   cursor: pointer;
 }
 
-.--prevent-scroll {
-  overflow: hidden;
-}
-
 .container {
   margin: 0 auto;
   padding: 0 var(--container-padding);

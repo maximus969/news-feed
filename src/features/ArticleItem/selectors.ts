@@ -5,12 +5,15 @@ import { getSources } from '../Source/selectors'
 import { ArticleItemType } from './types'
 import { SourcesType } from '../Source/types'
 
-export const getArticleItem = (state: RootState): ArticleItemType | null => state.articleItem.item
+export const getArticleItem =
+  (id: number) =>
+  (state: RootState): ArticleItemType | null =>
+    state.articleItem.items[id]
 
 export const getCachedArticleItem =
   (id: number) =>
   (state: RootState): ArticleItemType | null => {
-    const articleItem = getArticleItem(state)
+    const articleItem = getArticleItem(id)(state)
 
     if (articleItem) {
       return articleItem

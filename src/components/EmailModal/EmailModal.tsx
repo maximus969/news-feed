@@ -7,9 +7,10 @@ import { subscribeUrl } from '@components/apiUrls'
 
 interface EmailModalType {
   onModalClose: VoidFunction
+  shown: boolean
 }
 
-export const EmailModal: React.FC<EmailModalType> = ({ onModalClose }) => {
+export const EmailModal: React.FC<EmailModalType> = ({ onModalClose, shown }) => {
   const [sendingRequest, setSendingRequest] = useState(false)
 
   const _onClose = () => {
@@ -32,7 +33,7 @@ export const EmailModal: React.FC<EmailModalType> = ({ onModalClose }) => {
 
   return (
     <>
-      <ModalWrapper onModalClose={_onClose}>
+      <ModalWrapper onModalClose={_onClose} shown={shown}>
         <div className="email-modal">
           <h2 className="email-modal__title">
             Хотите получать последние новости от{' '}

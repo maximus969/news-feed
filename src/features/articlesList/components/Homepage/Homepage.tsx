@@ -48,8 +48,15 @@ export const Homepage: React.FC = () => {
             В тренде
           </Title>
           <div className="grid">
-            {repeat(() => {
-              return <ArticleCardSkeleton hasDescription={false} hasImage={false} className="home-page__trends-item" />
+            {repeat((i) => {
+              return (
+                <ArticleCardSkeleton
+                  key={i}
+                  hasDescription={false}
+                  hasImage={false}
+                  className="home-page__trends-item"
+                />
+              )
             }, 6)}
           </div>
         </section>
