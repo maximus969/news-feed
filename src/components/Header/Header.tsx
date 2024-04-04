@@ -1,19 +1,11 @@
-import React from 'react'
-import { Navigation } from '../Navigation/Navigation'
+import React, { FC } from 'react'
 import './Header.css'
-import { ColorSchemeSwitcher } from '../../features/colorScheme/components/ColorSchemeSwitcher/ColorSchemeSwitcher'
+import { useAdaptive } from '@components/customHooks'
+import { MobileHeader } from './MobileHeader/MobileHeader'
+import { DesktopHeader } from './DesktopHeader/DesktopHeader'
 
-export const Header: React.FC = () => {
-  return (
-    <div>
-      <header className="header">
-        <div className="container header-container">
-          <Navigation className="header--navigation" />
-          <div className="header-controls">
-            <ColorSchemeSwitcher />
-          </div>
-        </div>
-      </header>
-    </div>
-  )
+export const Header: FC = () => {
+  const { isMobile } = useAdaptive()
+
+  return isMobile ? <MobileHeader /> : <DesktopHeader />
 }

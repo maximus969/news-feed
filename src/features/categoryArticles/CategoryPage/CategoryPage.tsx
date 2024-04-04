@@ -17,6 +17,7 @@ import { HeroSkeleton } from '@components/Hero/HeroSkeleton'
 import { repeat } from '@components/utils'
 import { ArticleCardSkeleton } from '@components/ArticleCard/ArticleCardSkeleton'
 import { SidebarArticleCardSkeleton } from '@components/SidebarArticleCard/SidebarArticleCardSkeleton'
+import { useAdaptive } from '@components/customHooks'
 
 export const CategoryPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>()
@@ -25,6 +26,7 @@ export const CategoryPage: React.FC = () => {
   const categories = useSelector(getCategories)
   const sources = useSelector(getSources)
   const [loading, setLoading] = useState(true)
+  const { isDesktop, isMobile } = useAdaptive()
 
   useEffect(() => {
     setLoading(true)
@@ -43,15 +45,19 @@ export const CategoryPage: React.FC = () => {
               return <ArticleCardSkeleton key={i} className="category-page__item" />
             }, 6)}
           </section>
-          <section className="category-page__sidebar">
-            {repeat((i) => {
-              return <SidebarArticleCardSkeleton key={i} className="category-page__sidebar-item" />
-            }, 3)}
-          </section>
+          {isDesktop && (
+            <section className="category-page__sidebar">
+              {repeat((i) => {
+                return <SidebarArticleCardSkeleton key={i} className="category-page__sidebar-item" />
+              }, 3)}
+            </section>
+          )}
         </div>
       </section>
     )
   }
+
+  const mainArticles = isMobile ? articles : articles.slice(3)
 
   return (
     <section className="category-page">
@@ -62,7 +68,7 @@ export const CategoryPage: React.FC = () => {
       />
       <div className="container grid">
         <section className="category-page__content">
-          {articles.slice(3).map((item) => {
+          {mainArticles.map((item) => {
             const category = categories?.find(({ id }) => item?.category_id === id)
             const source = sources.find(({ id }) => item.source_id === id)
             return (
@@ -79,22 +85,24 @@ export const CategoryPage: React.FC = () => {
             )
           })}
         </section>
-        <section className="category-page__sidebar">
-          {articles.slice(0, 3).map((item) => {
-            const source = sources.find(({ id }) => item.source_id === id)
-            return (
-              <SidebarArticleCard
-                className="category-page__sidebar-item"
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                source={source?.name || ''}
-                image={item.image}
-                date={item.date}
-              />
-            )
-          })}
-        </section>
+        {isDesktop && (
+          <section className="category-page__sidebar">
+            {articles.slice(0, 3).map((item) => {
+              const source = sources.find(({ id }) => item.source_id === id)
+              return (
+                <SidebarArticleCard
+                  className="category-page__sidebar-item"
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  source={source?.name || ''}
+                  image={item.image}
+                  date={item.date}
+                />
+              )
+            })}
+          </section>
+        )}
       </div>
 
       <div className="partners-article">

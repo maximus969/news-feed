@@ -10,10 +10,10 @@ interface SkeletonTextType {
 
 export const SkeletonText: React.FC<SkeletonTextType> = ({ rowsCount = 1, dark = false }) => {
   return (
-    <div className={classNames('skeleton-text', { 'skeleton-text--dark': dark })}>
+    <span className={classNames('skeleton-text', { 'skeleton-text--dark': dark })}>
       {repeat((i) => {
         return <span key={i} className="skeleton-text__row skeleton-gradient"></span>
       }, rowsCount)}
-    </div>
+    </span>
   )
 }

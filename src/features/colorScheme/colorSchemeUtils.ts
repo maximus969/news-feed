@@ -1,4 +1,4 @@
-export const applyColorSceme = (scheme: 'light' | 'dark', persist = false): void => {
+export const applyColorScheme = (scheme: 'light' | 'dark', persist = false): void => {
   document.documentElement.setAttribute('scheme', scheme)
   persist && localStorage.setItem(LS_COLOR_SCHEME_KEY, scheme)
 }

@@ -35,6 +35,9 @@ export const EmailModal: React.FC<EmailModalType> = ({ onModalClose, shown }) =>
     <>
       <ModalWrapper onModalClose={_onClose} shown={shown}>
         <div className="email-modal">
+          <button className="email-modal__cross" onClick={_onClose}>
+            <img src={cross} alt="Закрытие модального окна" />
+          </button>
           <h2 className="email-modal__title">
             Хотите получать последние новости от{' '}
             <a href="https://karpov.courses/new" target="_blank" rel="noreferrer" className="email-modal__link">
@@ -49,9 +52,6 @@ export const EmailModal: React.FC<EmailModalType> = ({ onModalClose, shown }) =>
               Подписаться
             </Button>
           </form>
-          <button className="email-modal__cross" onClick={_onClose}>
-            <img src={cross} alt="Закрытие модального окна" />
-          </button>
         </div>
       </ModalWrapper>
     </>
