@@ -7,6 +7,11 @@
   background-color: var(--constant-black-alpha64);
 }
 
+.modal-wrapper__children {
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
 .modal-wrapper--alignY-center {
   display: flex;
   align-items: center;
@@ -37,4 +42,11 @@
 
 .--prevent-scroll {
   overflow: hidden;
+}
+
+@media all and (min-width: 1024px) {
+  .modal-wrapper__children {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

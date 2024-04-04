@@ -5,12 +5,14 @@
 .navigation--list {
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-left: 24px;
 }
 
 .navigation--item {
-  margin-right: 24px;
+  margin-right: 16px;
+  margin-bottom: 8px;
 }
 
 .navigation--item:last-child {
@@ -18,7 +20,6 @@
 }
 
 .navigation--link {
-  font-size: 16px;
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -26,4 +27,15 @@
 .active,
 .navigation--link:hover {
   color: var(--constant-accent);
+}
+
+@media all and (min-width: 1024px) {
+  .navigation--item {
+    margin-right: 24px;
+    margin-bottom: 0;
+  }
+
+  .navigation--link {
+    font-size: 16px;
+  }
 }

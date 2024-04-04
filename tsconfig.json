@@ -5,7 +5,7 @@
     "esModuleInterop": true,
     "lib": ["es2019", "dom", "dom.iterable"],
     "baseUrl": "src",
-    "paths": { "@components/*": ["components/*"] }
+    "paths": { "@components/*": ["components/*"], "@features/*": ["features/*"] }
   },
   "include": ["src", "custom.d.ts"],
   "exclude": ["node_modules", "dist"]

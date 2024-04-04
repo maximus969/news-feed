@@ -18,7 +18,7 @@ export const PartnersArticles: React.FC = () => {
   return (
     <>
       <section className="partner-article">
-        <div className="container grid">
+        <div className="partner-article__container container grid">
           <div className="partner-article-image-container">
             <img className="partner-article-image" src={partnersArticle.image} alt="Фотография статьи" />
           </div>

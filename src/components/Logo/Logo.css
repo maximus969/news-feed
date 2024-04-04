@@ -1,10 +1,17 @@
 .logo {
   display: block;
-  width: 154px;
+  width: 112px;
   cursor: pointer;
 }
 
 .logo-image {
   width: 100%;
   display: block;
+}
+
+@media all and (min-width: 1024px) {
+  .logo {
+    width: 154px;
+    flex-shrink: 0;
+  }
 }

@@ -9,6 +9,7 @@
   --constant-black-alpha64: rgba(0, 0, 0, 0.64);
   --constant-white-alpha12: rgba(255, 255, 255, 0.12);
   --constant-white-alpha64: rgba(255, 255, 255, 0.64);
+  --constant-black-alpha4: rgba(0, 0, 0, 0.04);
   --constant-black: #262a2f;
   --constant-accent: #0083fc;
   --constant-grey: #a3a3a3;
@@ -19,11 +20,12 @@
   --background-primary: var(--constant-white);
   --foreground-primary: var(--constant-black);
   --color-scheme-border: var(--constant-grey1);
-  --skeleton-background: var(var(--constant-grey));
+  --skeleton-background: var(--constant-grey);
+  --mobile-menu-button: #f2f2f2;
   --container-width: 940px;
   --grid-column-width: 60px;
-  --container-padding: 20px;
-  --grid-gap: 20px;
+  --container-padding: 16px;
+  --grid-gap: 24px;
   --skeleton-gradient: linear-gradient(to right, transparent 0%, var(--constant-black-alpha64) 100%);
 
   color-scheme: light;
@@ -36,6 +38,7 @@
   --skeleton-background: var(--constant-white-alpha12);
   --skeleton-gradient: linear-gradient(to right, transparent 0%, var(--constant-white-alpha12) 100%);
   --color-scheme-border: transparent;
+  --mobile-menu-button: var(--background-zero);
 
   color-scheme: dark;
 }
@@ -47,7 +50,6 @@ body {
   line-height: 20px;
   font-weight: 400;
   color: var(--foreground-primary);
-  min-width: calc(var(--container-width) + 2 * var(--container-padding));
 }
 
 a {
@@ -62,7 +64,6 @@ a {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(12, var(--grid-column-width));
   gap: var(--grid-gap);
 }
 
@@ -80,5 +81,20 @@ a {
 
   to {
     background-size: -100% 0;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  :root {
+    --container-padding: 20px;
+    --grid-gap: 20px;
+  }
+
+  body {
+    min-width: calc(var(--container-width) + 2 * var(--container-padding));
+  }
+
+  .grid {
+    grid-template-columns: repeat(12, var(--grid-column-width));
   }
 }

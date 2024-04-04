@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import './Navigation.css'
-import { Logo } from '@components/Logo/Logo'
 import classNames from 'classnames'
 import { NavLink } from 'react-router-dom'
 import { categoryTitles } from '../../features/categories/constants'
@@ -33,7 +32,6 @@ export const NavigationItem: React.FC<NavigationItemType> = ({ name = '', title 
 export const Navigation: FC<NavigationType> = ({ className = '' }) => {
   return (
     <nav className={classNames('navigation', className)}>
-      <Logo />
       <ul className="navigation--list">
         <NavigationItem title="Новости" />
         {Object.entries(categoryTitles).map(([name, title]) => {

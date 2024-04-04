@@ -1,37 +1,30 @@
 .email-modal {
-  width: 522px;
   position: relative;
   background-color: var(--constant-black);
   color: var(--constant-white);
-  padding: 16px 28px 28px;
+  padding: 16px;
 }
 
 .email-modal__title {
-  font-size: 28px;
-  line-height: 32px;
+  font-size: 20px;
+  line-height: 24px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .email-modal__text {
-  font-size: 16px;
-  line-height: 25px;
-  margin-bottom: 24px;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 16px;
 }
 
 .email-modal__cross {
-  position: absolute;
+  float: right;
   cursor: pointer;
-  right: 16px;
-  top: 16px;
 }
 
 .email-modal__link {
   color: var(--constant-accent);
-}
-
-.email-modal__form {
-  display: flex;
 }
 
 .email-modal__input {
@@ -40,7 +33,9 @@
   font-size: 16px;
   line-height: 24px;
   border-radius: 4px;
-  margin-right: 16px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  width: 100%;
   background: var(--constant-white);
   color: var(--constant-black);
 }
@@ -51,4 +46,33 @@
 
 .email-modal__input:focus {
   box-shadow: 0 0 0 1px var(--constant-accent);
+}
+
+@media all and (min-width: 1024px) {
+  .email-modal {
+    width: 522px;
+    padding: 16px 28px 28px;
+  }
+
+  .email-modal__form {
+    display: flex;
+  }
+
+  .email-modal__title {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 16px;
+  }
+
+  .email-modal__text {
+    font-size: 16px;
+    line-height: 25px;
+    margin-bottom: 24px;
+  }
+
+  .email-modal__input {
+    width: auto;
+    margin-right: 16px;
+    margin-bottom: 0;
+  }
 }

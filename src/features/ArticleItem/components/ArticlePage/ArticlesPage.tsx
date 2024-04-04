@@ -20,6 +20,7 @@ import { AppDispatchType } from '@components/store'
 import { HeroSkeleton } from '@components/Hero/HeroSkeleton'
 import { SkeletonText } from '@components/Skeleton/SkeletonText'
 import { SidebarArticleCardSkeleton } from '@components/SidebarArticleCard/SidebarArticleCardSkeleton'
+import { useAdaptive } from '@components/customHooks'
 
 export const Article: React.FC = () => {
   const { id }: { id?: number } = useParams()
@@ -28,6 +29,7 @@ export const Article: React.FC = () => {
   const relatedArticles = useSelector(getRelatedArticles(Number(id)))
   const sources = useSelector(getSources)
   const [loading, setLoading] = useState(false)
+  const { isDesktop } = useAdaptive()
 
   useLayoutEffect(() => {
     if (!articleItem?.text) {
@@ -61,11 +63,13 @@ export const Article: React.FC = () => {
               </p>
             </div>
 
-            <div className="sidebar__article-page">
-              {repeat((i) => {
-                return <SidebarArticleCardSkeleton key={i} className="sidebar__article-item" />
-              }, 3)}
-            </div>
+            {isDesktop && (
+              <div className="sidebar__article-page">
+                {repeat((i) => {
+                  return <SidebarArticleCardSkeleton key={i} className="sidebar__article-item" />
+                }, 3)}
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -75,7 +79,6 @@ export const Article: React.FC = () => {
   return (
     <section className="article-page">
       <Hero title={articleItem.title} image={articleItem.image} className="article-page__hero" />
-
       <div className="container article-page__main">
         <div className="article-page__info">
           <span className="article-page__category">{articleItem?.category && articleItem?.category?.name}</span>
@@ -91,22 +94,24 @@ export const Article: React.FC = () => {
             <p>{articleItem?.text}</p>
           </div>
 
-          <div className="sidebar__article-page">
-            {relatedArticles.slice(3, 9).map((item) => {
-              const source = sources?.find(({ id }) => item.source_id === id)
-              return (
-                <SidebarArticleCard
-                  className="sidebar__article-item"
-                  date={item.date}
-                  id={item.id}
-                  key={item.id}
-                  title={item.title}
-                  source={source?.name || ''}
-                  image={item.image}
-                />
-              )
-            })}
-          </div>
+          {isDesktop && (
+            <div className="sidebar__article-page">
+              {relatedArticles.slice(3, 9).map((item) => {
+                const source = sources?.find(({ id }) => item.source_id === id)
+                return (
+                  <SidebarArticleCard
+                    className="sidebar__article-item"
+                    date={item.date}
+                    id={item.id}
+                    key={item.id}
+                    title={item.title}
+                    source={source?.name || ''}
+                    image={item.image}
+                  />
+                )
+              })}
+            </div>
+          )}
         </div>
       </div>
 
