@@ -3,7 +3,7 @@
     "jsx": "react",
     "strict": true,
     "esModuleInterop": true,
-    "lib": ["es2019", "dom", "dom.iterable"],
+    "lib": ["es2019", "dom", "dom.iterable", "WebWorker"],
     "baseUrl": "src",
     "paths": { "@components/*": ["components/*"], "@features/*": ["features/*"] }
   },

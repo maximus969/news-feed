@@ -7,18 +7,28 @@ import { App } from './App/App'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import { AuthContextProvider } from '../features/Auth/AuthContextProvider'
+import { NetworkStatusContextProvider } from '@features/networkStatusContext/NetworkStatusContextProvider'
 
 const firebaseApp = initializeAPI()
 
 const basename = process.env.FOR_GH_PAGES === 'true' ? '/news-feed/' : '/'
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('/serviceWorker.js')
+    .then(() => console.log('service worker is ready'))
+    .catch(() => console.log('some error has occured'))
+}
+
 ReactDOM.render(
   <Provider store={store}>
-    <AuthContextProvider firebaseApp={firebaseApp}>
-      <Router basename={basename}>
-        <App />
-      </Router>
-    </AuthContextProvider>
+    <NetworkStatusContextProvider>
+      <AuthContextProvider firebaseApp={firebaseApp}>
+        <Router basename={basename}>
+          <App />
+        </Router>
+      </AuthContextProvider>
+    </NetworkStatusContextProvider>
   </Provider>,
   document.getElementById('root')
 )
