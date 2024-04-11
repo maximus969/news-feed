@@ -26,7 +26,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.js$/i,
         use: 'babel-loader',
         exclude: /node_modules/,
       },
@@ -35,7 +35,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(svg|jpg)$/,
+        test: /\.(svg|jpg|png)$/,
         type: 'asset/resource',
       },
       {
@@ -47,9 +47,14 @@ module.exports = {
         },
       },
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.(ts|tsx)$/i,
         use: 'ts-loader',
         exclude: [/node_modules/, /worker\.ts/],
+      },
+      {
+        test: /\.webmanifest$/i,
+        use: 'webpack-webmanifest-loader',
+        type: 'asset/resource',
       },
     ],
   },
@@ -65,6 +70,7 @@ module.exports = {
       filename: 'bundle.[contenthash].css',
     }),
     new htmlWebpackPlugin({
+      favicon: './src/images/favicon.ico',
       template: './src/index.html',
       excludeChunks: ['serviceWorker'],
     }),
@@ -83,6 +89,9 @@ module.exports = {
     }),
   ],
   devServer: {
+    client: {
+      overlay: false,
+    },
     open: true,
     historyApiFallback: {
       disableDotRule: true,

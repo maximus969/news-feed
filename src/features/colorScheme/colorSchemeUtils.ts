@@ -1,4 +1,6 @@
 export const applyColorScheme = (scheme: 'light' | 'dark', persist = false): void => {
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', scheme === 'dark' ? '#262a2f' : 'fff')
+
   document.documentElement.setAttribute('scheme', scheme)
   persist && localStorage.setItem(LS_COLOR_SCHEME_KEY, scheme)
 }
