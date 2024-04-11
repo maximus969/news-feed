@@ -1,0 +1,1 @@
+(()=>{"use strict";var r={1136:(r,e,s)=>{r.exports=s.p+"serviceWorker.js"}},e={};function s(t){var o=e[t];if(void 0!==o)return o.exports;var p=e[t]={exports:{}};return r[t](p,p.exports,s),p.exports}s.p="/news-feed",s(1136)})();

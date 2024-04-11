@@ -14,12 +14,13 @@
   --constant-grey: #a3a3a3;
   --constant-grey1: #ebebeb;
   --constant-white: #fff;
+  --constant-red: #f53;
   --color-overlay-black: #000;
   --background-zero: var(--constant-white);
   --background-primary: var(--constant-white);
   --foreground-primary: var(--constant-black);
   --color-scheme-border: var(--constant-grey1);
-  --skeleton-background: var(--constant-grey);
+  --skeleton-background: var(var(--constant-grey));
   --mobile-menu-button: #f2f2f2;
   --container-width: 940px;
   --grid-column-width: 60px;
@@ -1143,6 +1144,45 @@ a {
   to {
     transform: rotate(360deg);
   }
+}
+
+.offline-notification {
+  background-color: var(--constant-red);
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 20px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: var(--constant-white);
+  text-align: center;
+}
+
+@media all and (min-width: 1024px) {
+  .offline-notification {
+    padding: 6px 16px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+.offline-notification-animation-enter {
+  transition: transform ease-in 300ms;
+  transform: translateY(50px);
+}
+
+.offline-notification-animation-enter-active {
+  transform: translateY(0);
+}
+
+.offline-notification-animation-exit {
+  transition: transform ease-out 300ms;
+  transform: translateY(0);
+}
+
+.offline-notification-animation-exit-active {
+  transform: translateY(50px);
 }
 
 .page-animation-exit {
