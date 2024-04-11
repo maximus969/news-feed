@@ -65,6 +65,7 @@ module.exports = {
       filename: 'bundle.[contenthash].css',
     }),
     new htmlWebpackPlugin({
+      favicon: './src/images/favicon.ico',
       template: './src/index.html',
       excludeChunks: ['serviceWorker'],
     }),
