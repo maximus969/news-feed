@@ -16,6 +16,7 @@ module.exports = {
   entry: {
     main: './src/components/script.tsx',
     initColorScheme: './src/features/colorScheme/initColorScheme.ts',
+    serviceWorker: './src/features/serviceWorker/service.worker.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -38,9 +39,17 @@ module.exports = {
         type: 'asset/resource',
       },
       {
+        test: /service\.worker\.ts$/,
+        use: 'ts-loader',
+        type: 'asset/resource',
+        generator: {
+          filename: 'serviceWorker.js',
+        },
+      },
+      {
         test: /\.(ts|tsx)$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /worker\.ts/],
       },
     ],
   },
@@ -57,6 +66,7 @@ module.exports = {
     }),
     new htmlWebpackPlugin({
       template: './src/index.html',
+      excludeChunks: ['serviceWorker'],
     }),
     new HtmlInlinePlugin({ scriptMatchPattern: [/initColorScheme\..+\.js$/] }),
     new StylelintPlugin({

@@ -15,12 +15,13 @@
   --constant-grey: #a3a3a3;
   --constant-grey1: #ebebeb;
   --constant-white: #fff;
+  --constant-red: #f53;
   --color-overlay-black: #000;
   --background-zero: var(--constant-white);
   --background-primary: var(--constant-white);
   --foreground-primary: var(--constant-black);
   --color-scheme-border: var(--constant-grey1);
-  --skeleton-background: var(--constant-grey);
+  --skeleton-background: var(var(--constant-grey));
   --mobile-menu-button: #f2f2f2;
   --container-width: 940px;
   --grid-column-width: 60px;

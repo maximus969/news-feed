@@ -30,9 +30,9 @@ export const CategoryPage: React.FC = () => {
 
   useEffect(() => {
     setLoading(true)
-    dispatch(fetchCategoryArticles(categoryIds[category])).then(() => {
-      setLoading(false)
-    })
+    dispatch(fetchCategoryArticles(categoryIds[category]))
+      .unwrap()
+      .then(() => setLoading(false))
   }, [category])
 
   if (loading) {
