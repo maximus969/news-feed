@@ -28,8 +28,6 @@
   --container-padding: 16px;
   --grid-gap: 24px;
   --skeleton-gradient: linear-gradient(to right, transparent 0%, var(--constant-black-alpha64) 100%);
-
-  color-scheme: light;
 }
 
 [scheme="dark"] {
@@ -40,8 +38,6 @@
   --skeleton-gradient: linear-gradient(to right, transparent 0%, var(--constant-white-alpha12) 100%);
   --color-scheme-border: transparent;
   --mobile-menu-button: var(--background-zero);
-
-  color-scheme: dark;
 }
 
 body {
