@@ -4,6 +4,7 @@ import { LightScheme } from '@components/Icons/LightScheme'
 import classNames from 'classnames'
 import React, { FC } from 'react'
 import { ColorSchemeSwitcherValues } from '../../../types'
+import './ColorSchemeSwitcherMenu.css'
 
 interface Props {
   selectedScheme: ColorSchemeSwitcherValues
