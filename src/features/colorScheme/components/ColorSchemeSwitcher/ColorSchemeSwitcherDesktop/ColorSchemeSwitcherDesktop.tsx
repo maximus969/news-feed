@@ -3,6 +3,7 @@ import { ColorSchemeSwitcherButton } from '../ColorSchemeSwitcherButton/ColorSch
 import { Dropdown } from '@components/Dropdown/Dropdown'
 import { ColorSchemeSwitcherMenu } from '../ColorSchemeSwitcherMenu/ColorSchemeSwitcherMenu'
 import { useColorScheme } from '../../../hooks'
+import './ColorSchemeSwitcherDesktop.css'
 
 export const ColorSchemeSwitcherDesktop: FC = () => {
   const { userScheme, setUserScheme } = useColorScheme()
