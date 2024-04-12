@@ -15,7 +15,7 @@ export const OfflineNotificationWatcher: FC = () => {
       mountOnEnter={true}
       unmountOnExit={true}
     >
-      {!online && <OfflineNotification />}
+      <>{!online && <OfflineNotification />}</>
     </CSSTransition>
   )
 }
