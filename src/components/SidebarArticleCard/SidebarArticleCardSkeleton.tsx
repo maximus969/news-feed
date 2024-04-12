@@ -10,8 +10,8 @@ type SidebarArticleCardSkeletonType = {
 
 export const SidebarArticleCardSkeleton: React.FC<SidebarArticleCardSkeletonType> = ({ className }) => {
   return (
-    <>
-      <div className={classNames('sidebar-article-card', className)}>
+    <div className={classNames('sidebar-article-card', className)}>
+      <article className="sidebar-article-card__in">
         <div className="sidebar-article-card__media">
           <ImageComponent className="sidebar-article-card__image" skeleton />
         </div>
@@ -21,7 +21,7 @@ export const SidebarArticleCardSkeleton: React.FC<SidebarArticleCardSkeletonType
         <div className="sidebar-article-card__source">
           <SkeletonText />
         </div>
-      </div>
-    </>
+      </article>
+    </div>
   )
 }

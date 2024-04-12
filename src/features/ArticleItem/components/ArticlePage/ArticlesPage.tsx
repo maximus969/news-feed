@@ -49,41 +49,45 @@ export const Article: React.FC = () => {
 
   if (loading) {
     return (
-      <section className="article-page">
-        {articleItem.title && articleItem.image ? (
-          <Hero title={articleItem.title} image={articleItem.image} className="article-page__hero" />
-        ) : (
-          <HeroSkeleton hasText={true} className="article-page__hero" />
-        )}
-        <div className="container article-page__main">
-          <div className="article-page__info">
-            <SkeletonText />
-          </div>
-          <div className="grid">
-            <div className="article-page__content">
-              <p>
-                <SkeletonText rowsCount={6} />
-              </p>
+      <div className="article-page">
+        <div aria-hidden>
+          {articleItem.title && articleItem.image ? (
+            <Hero title={articleItem.title} image={articleItem.image} className="article-page__hero" />
+          ) : (
+            <HeroSkeleton hasText={true} className="article-page__hero" aria-label="Загрузка" />
+          )}
+          <div className="container article-page__main">
+            <div className="article-page__info">
+              <SkeletonText />
             </div>
-
-            {isDesktop && (
-              <div className="sidebar__article-page">
-                {repeat((i) => {
-                  return <SidebarArticleCardSkeleton key={i} className="sidebar__article-item" />
-                }, 3)}
+            <div className="grid">
+              <div className="article-page__content">
+                <p>
+                  <SkeletonText rowsCount={6} aria-label="Загрузка" />
+                </p>
               </div>
-            )}
+
+              {isDesktop && (
+                <aside className="sidebar__article-page">
+                  {repeat((i) => {
+                    return (
+                      <SidebarArticleCardSkeleton key={i} className="sidebar__article-item" aria-label="Загрузка" />
+                    )
+                  }, 3)}
+                </aside>
+              )}
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     )
   }
 
   return (
-    <section className="article-page">
+    <div className="article-page">
       <Hero title={articleItem.title} image={articleItem.image} className="article-page__hero" />
       <div className="container article-page__main">
-        <div className="article-page__info">
+        <section className="article-page__info" aria-label="Информация о статье">
           <span className="article-page__category">{articleItem?.category && articleItem?.category?.name}</span>
           <span className="article-page__date">{beautifyDate(articleItem?.date)}</span>
           {articleItem && articleItem.link.length > 0 && (
@@ -91,14 +95,14 @@ export const Article: React.FC = () => {
               {categoryTitles[articleItem?.source?.name as categoryNames]}
             </Source>
           )}
-        </div>
-        <div className="grid">
+        </section>
+        <section className="grid" aria-label="Статья">
           <div className="article-page__content">
             <p>{articleItem?.text}</p>
           </div>
 
           {isDesktop && (
-            <div className="sidebar__article-page">
+            <aside className="sidebar__article-page" aria-label="Второстепенный список статей">
               {relatedArticles.slice(3, 9).map((item) => {
                 const source = sources?.find(({ id }) => item.source_id === id)
                 return (
@@ -113,12 +117,12 @@ export const Article: React.FC = () => {
                   />
                 )
               })}
-            </div>
+            </aside>
           )}
-        </div>
+        </section>
       </div>
 
-      <section className="article-page__related-articles">
+      <section className="article-page__related-articles" aria-label="Читайте также">
         <div className="container">
           <Title Component={'h2'} className="article-page__related-articles-title">
             Читайте также
@@ -142,6 +146,6 @@ export const Article: React.FC = () => {
           </div>
         </div>
       </section>
-    </section>
+    </div>
   )
 }

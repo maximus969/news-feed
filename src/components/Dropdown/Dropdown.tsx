@@ -1,9 +1,10 @@
-import React, { HTMLAttributes, RefObject, useEffect, useState } from 'react'
+import React, { HTMLAttributes, RefObject, useEffect, useState, useRef } from 'react'
 import './Dropdown.css'
 import throttle from 'lodash.throttle'
 import { createPortal } from 'react-dom'
 import classNames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
+import { createFocusTrap } from 'focus-trap'
 
 interface DropdownType extends HTMLAttributes<HTMLElement> {
   targetRef: RefObject<HTMLElement>
@@ -29,10 +30,20 @@ export const Dropdown: React.FC<DropdownType> = ({
   ...rest
 }) => {
   const [coords, setCoords] = useState({ top: 0, right: 0 })
+  const ref = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    setCoords(calcCoodrinates(targetRef.current as HTMLElement))
-  }, [])
+    const focusTrap = createFocusTrap(ref.current as HTMLDivElement, { allowOutsideClick: true })
+
+    if (shown) {
+      focusTrap.activate()
+      setCoords(calcCoodrinates(targetRef.current as HTMLElement))
+    }
+
+    return () => {
+      focusTrap.deactivate()
+    }
+  }, [shown])
 
   useEffect(() => {
     onShownChange(shown)
@@ -59,7 +70,7 @@ export const Dropdown: React.FC<DropdownType> = ({
 
   return createPortal(
     <CSSTransition in={shown} classNames={'dropdown-animation'} mountOnEnter={true} unmountOnExit={true} timeout={200}>
-      <div className={classNames('dropdown', className)} style={{ ...style, ...coords }} {...rest}>
+      <div ref={ref} className={classNames('dropdown', className)} style={{ ...style, ...coords }} {...rest}>
         {children}
       </div>
     </CSSTransition>,

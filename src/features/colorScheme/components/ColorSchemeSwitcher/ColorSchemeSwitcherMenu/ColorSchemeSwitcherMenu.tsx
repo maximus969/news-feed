@@ -4,6 +4,7 @@ import { LightScheme } from '@components/Icons/LightScheme'
 import classNames from 'classnames'
 import React, { FC } from 'react'
 import { ColorSchemeSwitcherValues } from '../../../types'
+import './ColorSchemeSwitcherMenu.css'
 
 interface Props {
   selectedScheme: ColorSchemeSwitcherValues
@@ -13,8 +14,8 @@ interface Props {
 
 export const ColorSchemeSwitcherMenu: FC<Props> = ({ selectedScheme, onChangeScheme, className }) => {
   return (
-    <div className={classNames('color-scheme-switcher-menu', className)}>
-      <button className="color-scheme-switcher-menu__option" onClick={() => onChangeScheme('auto')}>
+    <div className={classNames('color-scheme-switcher-menu', className)} role="listbox">
+      <button role="option" className="color-scheme-switcher-menu__option" onClick={() => onChangeScheme('auto')}>
         <AutoScheme />
         <span className="color-scheme-switcher-menu__text">Авто</span>
         {selectedScheme === 'auto' && (
@@ -25,7 +26,7 @@ export const ColorSchemeSwitcherMenu: FC<Props> = ({ selectedScheme, onChangeSch
           />
         )}
       </button>
-      <button className="color-scheme-switcher-menu__option" onClick={() => onChangeScheme('light')}>
+      <button role="option" className="color-scheme-switcher-menu__option" onClick={() => onChangeScheme('light')}>
         <LightScheme />
         <span className="color-scheme-switcher-menu__text">Светлая</span>
         {selectedScheme === 'light' && (
@@ -36,7 +37,7 @@ export const ColorSchemeSwitcherMenu: FC<Props> = ({ selectedScheme, onChangeSch
           />
         )}
       </button>
-      <button className="color-scheme-switcher-menu__option" onClick={() => onChangeScheme('dark')}>
+      <button role="option" className="color-scheme-switcher-menu__option" onClick={() => onChangeScheme('dark')}>
         <DarkScheme />
         <span className="color-scheme-switcher-menu__text">Темная</span>
         {selectedScheme === 'dark' && (

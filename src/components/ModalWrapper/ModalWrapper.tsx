@@ -1,8 +1,9 @@
-import React, { FC, HTMLAttributes, useEffect } from 'react'
+import React, { FC, HTMLAttributes, useEffect, useRef } from 'react'
 import './ModalWrapper.css'
 import { createPortal } from 'react-dom'
 import classNames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
+import { createFocusTrap } from 'focus-trap'
 
 interface ModalWrapperType extends HTMLAttributes<HTMLElement> {
   alignX?: 'start' | 'center' | 'end'
@@ -10,6 +11,9 @@ interface ModalWrapperType extends HTMLAttributes<HTMLElement> {
   onModalClose: () => void
   shown: boolean
 }
+
+export const MODAl_LABEL_ID = 'modal-label-id'
+export const MODAl_DESCRIPTION_ID = 'modal-description-id'
 
 export const ModalWrapper: FC<ModalWrapperType> = ({
   children,
@@ -20,12 +24,17 @@ export const ModalWrapper: FC<ModalWrapperType> = ({
   shown,
   ...rest
 }: ModalWrapperType) => {
+  const ref = useRef<HTMLDivElement | null>(null)
+
   useEffect(() => {
+    const focusTrap = createFocusTrap(ref.current as HTMLDivElement, { allowOutsideClick: true })
     if (shown) {
+      focusTrap.activate()
       shown && document.documentElement.classList.add('--prevent-scroll')
     }
 
     return () => {
+      focusTrap.deactivate()
       document.documentElement.classList.remove('--prevent-scroll')
     }
   }, [shown])
@@ -52,6 +61,7 @@ export const ModalWrapper: FC<ModalWrapperType> = ({
       classNames={'modal-wrapper-animation'}
     >
       <div
+        ref={ref}
         className={classNames(
           'modal-wrapper',
           `modal-wrapper--alignY-${alignY}`,
@@ -60,6 +70,9 @@ export const ModalWrapper: FC<ModalWrapperType> = ({
         )}
         {...rest}
         onClick={onModalClose}
+        role="dialog"
+        aria-labelledby={MODAl_LABEL_ID}
+        aria-describedby={MODAl_DESCRIPTION_ID}
       >
         <div
           className="modal-wrapper__children"

@@ -6,7 +6,7 @@ import logo from '../../images/logo.svg'
 export const Logo: React.FC = () => {
   return (
     <NavLink to={'/'} className={'logo'}>
-      <img src={logo} alt="Логотип" className="logo-image" />
+      <img src={logo} alt="Главная страница" className="logo-image" />
     </NavLink>
   )
 }

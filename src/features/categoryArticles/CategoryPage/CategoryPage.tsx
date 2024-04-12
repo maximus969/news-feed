@@ -37,23 +37,23 @@ export const CategoryPage: React.FC = () => {
 
   if (loading) {
     return (
-      <section className="category-page">
+      <div className="category-page" aria-label="Загрузка">
         <HeroSkeleton title={categoryTitles[category]} className="category-page__hero" />
-        <div className="container grid">
-          <section className="category-page__content">
+        <section className="container grid">
+          <div className="category-page__content" aria-label="Загрузка">
             {repeat((i) => {
               return <ArticleCardSkeleton key={i} className="category-page__item" />
             }, 6)}
-          </section>
+          </div>
           {isDesktop && (
-            <section className="category-page__sidebar">
+            <section className="category-page__sidebar" aria-label="Загрузка">
               {repeat((i) => {
                 return <SidebarArticleCardSkeleton key={i} className="category-page__sidebar-item" />
               }, 3)}
             </section>
           )}
-        </div>
-      </section>
+        </section>
+      </div>
     )
   }
 
@@ -86,7 +86,7 @@ export const CategoryPage: React.FC = () => {
           })}
         </section>
         {isDesktop && (
-          <section className="category-page__sidebar">
+          <aside className="category-page__sidebar">
             {articles.slice(0, 3).map((item) => {
               const source = sources.find(({ id }) => item.source_id === id)
               return (
@@ -101,7 +101,7 @@ export const CategoryPage: React.FC = () => {
                 />
               )
             })}
-          </section>
+          </aside>
         )}
       </div>
 
