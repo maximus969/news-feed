@@ -16,12 +16,14 @@
   --constant-grey1: #ebebeb;
   --constant-white: #fff;
   --constant-red: #f53;
+  --inner-focus-border: 0 0 4px 0 var(--constant-red) inset;
+  --outer-focus-border: 4px solid var(--constant-red);
   --color-overlay-black: #000;
   --background-zero: var(--constant-white);
   --background-primary: var(--constant-white);
   --foreground-primary: var(--constant-black);
   --color-scheme-border: var(--constant-grey1);
-  --skeleton-background: var(var(--constant-grey));
+  --skeleton-background: var(--constant-grey);
   --mobile-menu-button: #f2f2f2;
   --container-width: 940px;
   --grid-column-width: 60px;
@@ -38,6 +40,10 @@
   --skeleton-gradient: linear-gradient(to right, transparent 0%, var(--constant-white-alpha12) 100%);
   --color-scheme-border: transparent;
   --mobile-menu-button: var(--background-zero);
+}
+
+*:focus-visible {
+  outline: var(--outer-focus-border);
 }
 
 body {
@@ -93,5 +99,12 @@ a {
 
   .grid {
     grid-template-columns: repeat(12, var(--grid-column-width));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
   }
 }

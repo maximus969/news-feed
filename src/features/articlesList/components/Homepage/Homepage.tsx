@@ -19,6 +19,7 @@ import { HeroSkeleton } from '@components/Hero/HeroSkeleton'
 import { ArticleCardSkeleton } from '@components/ArticleCard/ArticleCardSkeleton'
 import { SidebarArticleCardSkeleton } from '@components/SidebarArticleCard/SidebarArticleCardSkeleton'
 import { useAdaptive } from '@components/customHooks'
+import { PartnersArticles } from '@features/partnersArticles/components/PartnersArticles'
 
 export const Homepage: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>()
@@ -50,7 +51,7 @@ export const Homepage: React.FC = () => {
           <Title Component={'h2'} className="home-page__title">
             В тренде
           </Title>
-          <div className="grid">
+          <div className="grid" aria-label="Загрузка">
             {repeat((i) => {
               return (
                 <ArticleCardSkeleton
@@ -70,13 +71,20 @@ export const Homepage: React.FC = () => {
           <div className="grid">
             <section className="home-page__content">
               {repeat((i) => {
-                return <ArticleCardSkeleton key={i} className="home-page__article-card" hasDescription={false} />
+                return (
+                  <ArticleCardSkeleton
+                    key={i}
+                    className="home-page__article-card"
+                    hasDescription={false}
+                    aria-label="Загрузка"
+                  />
+                )
               }, 4)}
             </section>
 
             <section className="home-page__sidebar">
               {repeat((i) => {
-                return <SidebarArticleCardSkeleton key={i} className="home-page__sidebar-item" />
+                return <SidebarArticleCardSkeleton key={i} className="home-page__sidebar-item" aria-label="Загрузка" />
               }, 2)}
             </section>
           </div>
@@ -126,7 +134,7 @@ export const Homepage: React.FC = () => {
           Karpov
         </Title>
         <div className="grid">
-          <section className="home-page__content">
+          <div className="home-page__content">
             {karpovArticles.slice(2, 6).map((item) => {
               return (
                 <ArticleCard
@@ -141,9 +149,9 @@ export const Homepage: React.FC = () => {
                 />
               )
             })}
-          </section>
+          </div>
 
-          <section className="home-page__sidebar">
+          <aside className="home-page__sidebar">
             {karpovArticles.slice(0, 2).map((item) => {
               return (
                 <ArticleCard
@@ -158,14 +166,16 @@ export const Homepage: React.FC = () => {
                 />
               )
             })}
-          </section>
+          </aside>
         </div>
       </section>
 
-      <div className="home-page__promo" />
+      <section className="home-page__promo">
+        <PartnersArticles />
+      </section>
 
       <section className="container grid home-page__section">
-        <section className="home-page__content">
+        <div className="home-page__content">
           {mainArticles.map((item) => {
             const source = sources.find(({ id }) => item.source_id === id)
             return (
@@ -181,9 +191,9 @@ export const Homepage: React.FC = () => {
               />
             )
           })}
-        </section>
+        </div>
         {isDesktop && (
-          <section className="home-page__sidebar">
+          <aside className="home-page__sidebar">
             {articles.slice(1, 4).map((item) => {
               const source = sources.find(({ id }) => item.source_id === id)
               return (
@@ -198,7 +208,7 @@ export const Homepage: React.FC = () => {
                 />
               )
             })}
-          </section>
+          </aside>
         )}
       </section>
     </div>

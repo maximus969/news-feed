@@ -16,7 +16,7 @@ export const Hero: React.FC<HeroPropsType> = ({ image, title, text, className })
   return (
     <section className={classNames('hero', { 'hero__no-image': !hasImage }, className)}>
       <div className="hero__in">
-        {hasImage && <ImageComponent src={image} className="hero__image" />}
+        {hasImage && <ImageComponent src={image} className="hero__image" alt={title} />}
         <div className="hero__container container">
           <div className="hero__content">
             <Title className="hero__title">{title}</Title>
