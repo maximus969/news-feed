@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { beautifyDate } from '../utils'
 import { categoryNames } from '../../features/categories/types'
-import { categoryTitles } from '../../features/categories/constants'
 import { Source } from '../../features/Source/components/Source'
 import { ImageComponent } from '@components/Image/ImageComponent'
+import { useTranslation } from 'react-i18next'
 
 type ArticleCardType = {
   id: number
@@ -31,6 +31,7 @@ export const ArticleCard: React.FC<ArticleCardType> = ({
 }) => {
   const hasDescription = description && description?.length > 0
   const hasImage = image && image.length > 0
+  const { t, i18n } = useTranslation()
   return (
     <Link
       to={`/article/${id}`}
@@ -43,9 +44,11 @@ export const ArticleCard: React.FC<ArticleCardType> = ({
           {hasDescription && <span className="article-card__description">{description}</span>}
           <div className="article-card__info">
             {category && category?.length > 0 && (
-              <span className="article-card__category">{categoryTitles[category]}</span>
+              <span className="article-card__category">{t(`category_${category}`)}</span>
             )}
-            {date && date?.length > 0 && <span className="article-card__date">{beautifyDate(date)}</span>}
+            {date && date?.length > 0 && (
+              <span className="article-card__date">{beautifyDate(date, i18n.language)}</span>
+            )}
             {source && source.length > 0 && <Source>{source}</Source>}
           </div>
         </div>

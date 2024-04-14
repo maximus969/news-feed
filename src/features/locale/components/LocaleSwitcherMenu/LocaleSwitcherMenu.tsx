@@ -33,39 +33,6 @@ export const LocaleSwitcherMenu: React.FC<LocaleSwitcherMenuType> = ({ selectedL
           />
         )}
       </button>
-
-      <button className="locale-switcher-menu__option" onClick={() => onChangeLocale(Locale.de)}>
-        <span className="locale-switcher-menu__text">German</span>
-        {selectedLocale === Locale.de && (
-          <img
-            className="locale-switcher-menu__check"
-            src={require('../../../../images/mark.svg')}
-            alt="Выбранная тема"
-          />
-        )}
-      </button>
-
-      <button className="locale-switcher-menu__option" onClick={() => onChangeLocale(Locale.fr)}>
-        <span className="locale-switcher-menu__text">French</span>
-        {selectedLocale === Locale.fr && (
-          <img
-            className="locale-switcher-menu__check"
-            src={require('../../../../images/mark.svg')}
-            alt="Выбранная тема"
-          />
-        )}
-      </button>
-
-      <button className="locale-switcher-menu__option" onClick={() => onChangeLocale(Locale.it)}>
-        <span className="locale-switcher-menu__text">Italian</span>
-        {selectedLocale === Locale.it && (
-          <img
-            className="locale-switcher-menu__check"
-            src={require('../../../../images/mark.svg')}
-            alt="Выбранная тема"
-          />
-        )}
-      </button>
     </div>
   )
 }

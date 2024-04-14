@@ -8,6 +8,7 @@ import React, { FC, useEffect, useRef, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { createFocusTrap } from 'focus-trap'
 import { LocaleSwitcherMobile } from '@features/locale/components/LocaleSwitcherMobile/LocaleSwitcherMobile'
+import { useTranslation } from 'react-i18next'
 
 export const MobileHeader: FC = () => {
   const [isOpenMenu, toggleMenu] = useState(false)
@@ -19,6 +20,8 @@ export const MobileHeader: FC = () => {
       toggleMenu(false)
     }
   }
+
+  const { t } = useTranslation()
 
   const closeSubMenu = () => {
     toggleSubMenu(false)
@@ -56,7 +59,7 @@ export const MobileHeader: FC = () => {
       <div className="container header__mobile-container">
         <Logo />
         <button
-          aria-label={isOpenMenu ? 'Скрыть меню' : 'Открыть меню'}
+          aria-label={isOpenMenu ? t(`header_mobile_menu_button_close`) : t(`header_mobile_menu_button_open`)}
           className="header__mobile-button"
           onClick={() => toggleMenu(!isOpenMenu)}
         >
@@ -69,7 +72,7 @@ export const MobileHeader: FC = () => {
           <div className="header__mobile-menu">
             {isOpenSubMenu ? (
               <button className="header__mobile-back-button" onClick={closeSubMenu}>
-                К меню
+                {t(`header_mobile_menu_back`)}
               </button>
             ) : (
               <Navigation className="header--mobile" />

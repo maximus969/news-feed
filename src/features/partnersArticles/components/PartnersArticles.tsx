@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import './PartnersArticles.css'
 import { getSortedPartnerArticle } from '@components/api'
 import { PartnersPostsType } from '../types'
+import { useTranslation } from 'react-i18next'
 
 export const PartnersArticles: React.FC = () => {
   const [partnersArticle, setPartnersArticle] = useState<PartnersPostsType | null>(null)
+  const { t } = useTranslation()
 
   useEffect(() => {
     ;(async () => {
@@ -25,7 +27,7 @@ export const PartnersArticles: React.FC = () => {
 
           <div className="partner-article-content">
             <span className="partner-article-caption">
-              {`Партнерский материал от ${partnersArticle['company-name']}`}{' '}
+              {t(`partner_article_caption`, { name: partnersArticle['company-name'] })}
             </span>
             <h2 className="partner-article-title">{partnersArticle.articleTitle}</h2>
             <p className="partner-article-text">{partnersArticle.description}</p>

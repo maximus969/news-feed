@@ -8,12 +8,3 @@ export const categoryIds: Record<categoryNames, number> = {
   other: 5,
   politics: 4,
 }
-
-export const categoryTitles: Record<categoryNames, string> = {
-  fashion: 'Мода',
-  tech: 'Технологии',
-  sport: 'Спорт',
-  ['karpov.courses']: 'Karpov',
-  other: 'Прочее',
-  politics: 'Политика',
-}
