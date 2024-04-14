@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import { store } from './store'
 import { AuthContextProvider } from '../features/Auth/AuthContextProvider'
 import { NetworkStatusContextProvider } from '@features/networkStatusContext/NetworkStatusContextProvider'
+import { initI18n } from '@features/locale/utils'
 
 const firebaseApp = initializeAPI()
 
@@ -20,15 +21,17 @@ if ('serviceWorker' in navigator) {
     .catch(() => console.log('some error has occured'))
 }
 
-ReactDOM.render(
-  <Provider store={store}>
-    <NetworkStatusContextProvider>
-      <AuthContextProvider firebaseApp={firebaseApp}>
-        <Router basename={basename}>
-          <App />
-        </Router>
-      </AuthContextProvider>
-    </NetworkStatusContextProvider>
-  </Provider>,
-  document.getElementById('root')
-)
+initI18n(() => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <NetworkStatusContextProvider>
+        <AuthContextProvider firebaseApp={firebaseApp}>
+          <Router basename={basename}>
+            <App />
+          </Router>
+        </AuthContextProvider>
+      </NetworkStatusContextProvider>
+    </Provider>,
+    document.getElementById('root')
+  )
+})

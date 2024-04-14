@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatchType } from '@components/store'
 import { categoryNames } from '../../categories/types'
 import { getCategoryNews } from '../selectors'
-import { categoryIds, categoryTitles } from '../../categories/constants'
+import { categoryIds } from '../../categories/constants'
 import { getCategories } from '../../categories/selectors'
 import { getSources } from '../../Source/selectors'
 import { fetchCategoryArticles } from '../actions'
@@ -18,6 +18,7 @@ import { repeat } from '@components/utils'
 import { ArticleCardSkeleton } from '@components/ArticleCard/ArticleCardSkeleton'
 import { SidebarArticleCardSkeleton } from '@components/SidebarArticleCard/SidebarArticleCardSkeleton'
 import { useAdaptive } from '@components/customHooks'
+import { useTranslation } from 'react-i18next'
 
 export const CategoryPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>()
@@ -27,18 +28,19 @@ export const CategoryPage: React.FC = () => {
   const sources = useSelector(getSources)
   const [loading, setLoading] = useState(true)
   const { isDesktop, isMobile } = useAdaptive()
+  const { t, i18n } = useTranslation()
 
   useEffect(() => {
     setLoading(true)
-    dispatch(fetchCategoryArticles(categoryIds[category]))
+    dispatch(fetchCategoryArticles({ lang: i18n.language, categoryId: categoryIds[category] }))
       .unwrap()
       .then(() => setLoading(false))
-  }, [category])
+  }, [category, i18n.language])
 
   if (loading) {
     return (
-      <div className="category-page" aria-label="Загрузка">
-        <HeroSkeleton title={categoryTitles[category]} className="category-page__hero" />
+      <div className="category-page" aria-label={t(`loading`)}>
+        <HeroSkeleton title={t(`category_${category}`)} className="category-page__hero" />
         <section className="container grid">
           <div className="category-page__content" aria-label="Загрузка">
             {repeat((i) => {
@@ -62,7 +64,7 @@ export const CategoryPage: React.FC = () => {
   return (
     <section className="category-page">
       <Hero
-        title={categoryTitles[category as categoryNames]}
+        title={t(`category_${category}`)}
         className="category-page__hero"
         image={require(`../../../images/categories/${category}.jpg`)}
       />

@@ -1,8 +1,10 @@
 import React from 'react'
 import { Navigation } from '../Navigation/Navigation'
 import './Footer.css'
+import { useTranslation } from 'react-i18next'
 
 export const Footer: React.FC = () => {
+  const { t } = useTranslation()
   return (
     <footer className="footer">
       <div className="container">
@@ -11,9 +13,15 @@ export const Footer: React.FC = () => {
         </div>
         <div className="footer--bottom">
           Сделано на Frontend курсе в &nbsp;
-          <a rel="noreferrer" className="footer--link" href="https://karpov.courses/frontend" target="_blank">
-            Karpov.Courses
-          </a>
+          <a
+            rel="noreferrer"
+            className="footer--link"
+            dangerouslySetInnerHTML={{
+              __html: t(`footer_link`, {
+                link: `<a class="footer_link" href="https://karpov.courses/frontend" target="_blank"  rel="noreferrer">Karpov.Courses</a>, `,
+              }),
+            }}
+          />
         </div>
       </div>
     </footer>

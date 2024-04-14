@@ -20,6 +20,8 @@ import { ArticleCardSkeleton } from '@components/ArticleCard/ArticleCardSkeleton
 import { SidebarArticleCardSkeleton } from '@components/SidebarArticleCard/SidebarArticleCardSkeleton'
 import { useAdaptive } from '@components/customHooks'
 import { PartnersArticles } from '@features/partnersArticles/components/PartnersArticles'
+import { useTranslation } from 'react-i18next'
+import { Locale } from '@features/locale/types'
 
 export const Homepage: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>()
@@ -30,15 +32,16 @@ export const Homepage: React.FC = () => {
   const sources = useSelector(getSources)
   const [loading, setLoading] = useState(true)
   const { isDesktop, isMobile } = useAdaptive()
+  const { t, i18n } = useTranslation()
 
   useEffect(() => {
     setLoading(true)
     Promise.all([
-      dispatch(fetchNews()),
-      dispatch(fetchTrends()),
-      dispatch(fetchCategoryArticles(categoryIds['karpov.courses'])),
+      dispatch(fetchNews(i18n.language)),
+      dispatch(fetchTrends(i18n.language)),
+      dispatch(fetchCategoryArticles({ lang: i18n.language, categoryId: categoryIds['karpov.courses'] })),
     ]).then(() => setLoading(false))
-  }, [])
+  }, [i18n.language])
 
   const firstArticle = articles[0]
   const mainArticles = isMobile ? articles.slice(1) : articles.slice(4)
@@ -49,7 +52,7 @@ export const Homepage: React.FC = () => {
         <HeroSkeleton hasText={true} className="home-page__hero" />
         <section className="container home-page__section">
           <Title Component={'h2'} className="home-page__title">
-            В тренде
+            {t(`homepage_trends_title`)}
           </Title>
           <div className="grid" aria-label="Загрузка">
             {repeat((i) => {
@@ -64,31 +67,36 @@ export const Homepage: React.FC = () => {
             }, 6)}
           </div>
         </section>
-        <section className="container home-page__section">
-          <Title Component={'h2'} className="home-page__title">
-            Karpov
-          </Title>
-          <div className="grid">
-            <section className="home-page__content">
-              {repeat((i) => {
-                return (
-                  <ArticleCardSkeleton
-                    key={i}
-                    className="home-page__article-card"
-                    hasDescription={false}
-                    aria-label="Загрузка"
-                  />
-                )
-              }, 4)}
-            </section>
 
-            <section className="home-page__sidebar">
-              {repeat((i) => {
-                return <SidebarArticleCardSkeleton key={i} className="home-page__sidebar-item" aria-label="Загрузка" />
-              }, 2)}
-            </section>
-          </div>
-        </section>
+        {i18n.language === Locale.ru && (
+          <section className="container home-page__section">
+            <Title Component={'h2'} className="home-page__title">
+              Karpov
+            </Title>
+            <div className="grid">
+              <section className="home-page__content">
+                {repeat((i) => {
+                  return (
+                    <ArticleCardSkeleton
+                      key={i}
+                      className="home-page__article-card"
+                      hasDescription={false}
+                      aria-label="Загрузка"
+                    />
+                  )
+                }, 4)}
+              </section>
+
+              <section className="home-page__sidebar">
+                {repeat((i) => {
+                  return (
+                    <SidebarArticleCardSkeleton key={i} className="home-page__sidebar-item" aria-label="Загрузка" />
+                  )
+                }, 2)}
+              </section>
+            </div>
+          </section>
+        )}
       </div>
     )
   }
@@ -108,7 +116,7 @@ export const Homepage: React.FC = () => {
 
       <section className="container home-page__section">
         <Title Component={'h2'} className="home-page__title">
-          В тренде
+          {t(`homepage_trends_title`)}
         </Title>
         <div className="grid">
           {trendArticles.map(({ id, title, category_id, source_id, date }) => {
@@ -129,50 +137,54 @@ export const Homepage: React.FC = () => {
         </div>
       </section>
 
-      <section className="container home-page__section">
-        <Title Component={'h2'} className="home-page__title">
-          Karpov
-        </Title>
-        <div className="grid">
-          <div className="home-page__content">
-            {karpovArticles.slice(2, 6).map((item) => {
-              return (
-                <ArticleCard
-                  className="home-page__article-card"
-                  key={item.id}
-                  id={item.id}
-                  date={item.date}
-                  title={item.title}
-                  image={item.image}
-                  description={item.description}
-                  source={sources[item.source_id]?.name}
-                />
-              )
-            })}
+      {i18n.language === Locale.ru && (
+        <section className="container home-page__section">
+          <Title Component={'h2'} className="home-page__title">
+            Karpov
+          </Title>
+          <div className="grid">
+            <div className="home-page__content">
+              {karpovArticles.slice(2, 6).map((item) => {
+                return (
+                  <ArticleCard
+                    className="home-page__article-card"
+                    key={item.id}
+                    id={item.id}
+                    date={item.date}
+                    title={item.title}
+                    image={item.image}
+                    description={item.description}
+                    source={sources[item.source_id]?.name}
+                  />
+                )
+              })}
+            </div>
+
+            <aside className="home-page__sidebar">
+              {karpovArticles.slice(0, 2).map((item) => {
+                return (
+                  <ArticleCard
+                    className="home-page__sidebar-item"
+                    key={item.id}
+                    id={item.id}
+                    date={item.date}
+                    title={item.title}
+                    image={item.image}
+                    description={item.description}
+                    source={sources[item.source_id]?.name}
+                  />
+                )
+              })}
+            </aside>
           </div>
+        </section>
+      )}
 
-          <aside className="home-page__sidebar">
-            {karpovArticles.slice(0, 2).map((item) => {
-              return (
-                <ArticleCard
-                  className="home-page__sidebar-item"
-                  key={item.id}
-                  id={item.id}
-                  date={item.date}
-                  title={item.title}
-                  image={item.image}
-                  description={item.description}
-                  source={sources[item.source_id]?.name}
-                />
-              )
-            })}
-          </aside>
-        </div>
-      </section>
-
-      <section className="home-page__promo">
-        <PartnersArticles />
-      </section>
+      {i18n.language === Locale.ru && (
+        <section className="home-page__promo">
+          <PartnersArticles />
+        </section>
+      )}
 
       <section className="container grid home-page__section">
         <div className="home-page__content">

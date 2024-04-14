@@ -3,8 +3,10 @@
     "jsx": "react",
     "strict": true,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "lib": ["es2019", "dom", "dom.iterable", "WebWorker"],
     "baseUrl": "src",
+    "skipLibCheck": true,
     "paths": { "@components/*": ["components/*"], "@features/*": ["features/*"] }
   },
   "include": ["src", "custom.d.ts"],
